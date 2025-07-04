@@ -1,0 +1,88 @@
+{
+    "name": "openmrs-module-appointments-frontend",
+    "version": "1.1.1",
+    "description": "An appointment app for bahmni/openmrs.",
+    "license": "AGPLv3",
+    "engines": {
+        "node": ">=12"
+    },
+    "scripts": {
+        "build-react": "cd ui && npm run build-react",
+        "build": "npm run build-react && webpack --mode=development",
+        "bundle": "npm run build-react && webpack --mode=production",
+        "test-react": "cd ui && npm run test-react",
+        "test-angular": "npm run build && karma start",
+        "test": "npm run test-react && npm run test-angular",
+        "preinstall": "cd ui && npm install"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Bahmni/openmrs-module-appointment-frontend"
+    },
+    "author": "bahmni@thoughtworks.com",
+    "devDependencies": {
+        "@types/carbon-components-react": "^7.55.1",
+        "angular-mocks": "1.4.9",
+        "carbon-components": "^10.19.0",
+        "copy-webpack-plugin": "^5.0.3",
+        "css-loader": "^3.1.0",
+        "empty-module": "0.0.2",
+        "exports-loader": "^0.7.0",
+        "file-loader": "^4.1.0",
+        "html-loader": "^0.5.5",
+        "html-webpack-plugin": "^3.2.0",
+        "imports-loader": "^0.8.0",
+        "jsdom": "^12.0.0",
+        "karma": "^3.1.4",
+        "karma-coverage": "~0.2.4",
+        "karma-jasmine": "~0.2.3",
+        "karma-jsdom-launcher": "6.1.5",
+        "karma-junit-reporter": "^0.2.2",
+        "karma-sourcemap-loader": "^0.3.7",
+        "karma-webpack": "^4.0.2",
+        "q": "1.0.1",
+        "sass-loader": "^7.1.0",
+        "style-loader": "^0.23.1",
+        "url-loader": "^2.1.0",
+        "webpack": "^4.35.2",
+        "webpack-cli": "^3.3.5",
+        "webpack-dev-server": "^3.7.2"
+    },
+    "dependencies": {
+        "@carbon/icons-react": "^10.18.0",
+        "@uirouter/angularjs": "0.2.18",
+        "angular": "1.5.7",
+        "angular-bindonce": "github:pasvaz/bindonce#0.3.3",
+        "angular-cookies": "1.4.9",
+        "angular-elastic": "~2.5.0",
+        "angular-ivh-treeview": "^1.1.0",
+        "angular-sanitize": "1.4.9",
+        "angular-translate": "2.7.2",
+        "angular-translate-handler-log": "*",
+        "angular-translate-loader-static-files": "*",
+        "angular-translate-storage-local": "*",
+        "angular-ui-calendar": "1.0.2",
+        "angular-ui-select2": "0.0.5",
+        "bahmni-commons-ng": "0.0.2",
+        "carbon-components-react": "7.55.1",
+        "fullcalendar": "2.7.3",
+        "fullcalendar-scheduler": "1.3.2",
+        "jquery": "1.9.1",
+        "ng-clip": "0.2.5",
+        "ng-dialog": "0.3.12",
+        "ng-infinite-scroll": "1.3.0",
+        "ng-tags-input": "^3.1.1",
+        "sass": "^1.89.2",
+        "select2": "github:select2/select2#3.4.8",
+        "stacktrace-js": "0.6.4",
+        "zeroclipboard": "2.1.6"
+    },
+    "peerDependencies": {
+        "carbon-components": "^10.19.0",
+        "carbon-icons": "^7.0.7"
+    },
+    "readmeFilename": "README.md",
+    "resolutions": {
+        "@ibm/telemetry-js": "1.1.0"
+    }
+}

@@ -1,0 +1,72 @@
+.tableGridWrapper{
+    overflow-x: auto;
+    margin: 10px 20px 10px 10px;
+
+    .tableGridSummary{
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+        margin-bottom:8px;
+        border: none;
+        text-align: center;
+        tr{
+            border-bottom: none;
+            color: #1A57E8 !important;
+        }
+
+    thead > tr > td {
+      font-weight: 900;
+      font-family: opensansSemibold, serif;
+      font-size: 15px;
+      width: 100%;
+      padding: 20px;
+      background-color: rgba(26,87,232,0.15);
+      border: none !important;
+      
+
+      &.servicesHeader {
+        text-align: right;
+        background-color: white;
+        font-weight: bold;
+        font-size: 15px;
+        width: 100%;
+        border: none;
+      }
+    }
+
+
+        tbody > tr > td {
+                min-width:110px;
+                padding: 25px;
+                border: 1px solid #ddd;
+                color: #000000;
+                a{
+                    text-decoration: none;
+                    color: #2b95ff;
+                    cursor: pointer;
+                }
+        }
+
+        .tableTotalCount{
+            background-color: #f0faff;
+            color: black;
+        }
+    }
+    .missedCount{
+        color:red;
+    }
+    .currentDateColumn{
+        background-color: #F4F7FF;
+    }
+    .noAppointments{
+        background-color: #f0faff;
+        font-size: 15px;
+    }
+    .gridHeading{
+        margin-left: 10px;
+    }
+}
+hr{
+    border: 0;
+    border-bottom: 1px solid #ddd;
+}

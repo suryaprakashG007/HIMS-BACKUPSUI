@@ -1,0 +1,22 @@
+@import '../../variables.scss';
+
+.buttonGroup {
+  display: flex;
+  width: 408px;
+  justify-content: space-between;
+  padding: 10px 0;
+  button {
+    padding: 10px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border-color: #A6C8FF;
+    background: #ffffff;
+    background: var(--color-secondary-1);
+    color: #0F62FE;
+    &.selected {
+      background: #D0E2FF;
+      border: 1px solid;
+    }
+  }
+}

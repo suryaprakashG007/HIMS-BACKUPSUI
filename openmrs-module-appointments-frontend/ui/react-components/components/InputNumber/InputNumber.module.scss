@@ -1,0 +1,44 @@
+@import '../../variables.scss';
+
+.inputNumberContainer {
+  display: inline-flex;
+  border-bottom: 1px solid $border-color;
+  padding-bottom: 1px;
+  margin: 0 5% 0 5%;
+  .inputButton {
+    color: $secondary-color-1;
+    cursor: pointer;
+    background-color: $primary-color-1;
+    height: 16px;
+    width: 25px;
+    font-size: 10px;
+    border: none;
+  }
+  .inputButton:hover {
+    background-color: $border-color;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type=number] {
+    -moz-appearance: textfield;
+    border: none;
+    width: 39px;
+    text-align: center;
+    height: 12px;
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.disable {
+  cursor: not-allowed;
+  div:first-child {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}

@@ -1,0 +1,48 @@
+<header class="reg-header" ng-controller="NavigationController" style="background-color: #061436;">
+        <ul class="top-nav" ng-class="{'has-print' : hasPrint}">
+            <a class="back-btn" accesskey="h" href="../home/index.html" ng-click="onHomeNavigate($event)">
+                <img src="/bahmni/images/Homeicon.png" alt="Home" style="width: 23px; height: 23px;">
+            </a>
+        </ul>
+        <div class="reg-header-right">
+            <div ui-view="headerExtension" class="print-action-items"></div>
+        <ul class="top-nav" ng-class="{'has-print' : hasPrint}">
+<li ng-repeat="extension in extensions">
+    <a ng-click="goTo(extension.url)" accesskey="{{extension.shortcutKey | translate}}">
+        <!-- Render image if iconImage exists -->
+         <div style="display: flex; flex-direction: row; justify-content: center;align-items: center;">
+         <div>
+            <img
+            ng-if="extension.iconImage"
+            ng-src="{{extension.iconImage}}"
+            alt="{{extension.translationKey | translate}}"
+            style="width: 24px; height: 24px; margin-right: 5px;">
+        </div>
+ 
+        <!-- Display link text -->
+        <span class="nav-link"
+              ng-bind-html="extension | titleTranslate" >
+        </span>
+        </div>
+    </a>
+</li>
+</ul>
+
+
+            <button class="btn-user-info fr" style="margin-top: 13px; height: 35px;width:65px; align-items: center; justify-items: center; display: flex; padding: 0; gap: 5px; background: #FFFFFF1C; border-radius: 20px;">
+            <img src="/bahmni/images/Doctor.png" alt="doctor" style="width: 35px; height: 35px; margin-left: 0px;">
+            <i class="fa fa-caret-down fa-white mini"></i>
+            </button>
+            <ul style="background-color: #061436;">
+                <li>
+                    <a><i class="fa fa-user fa-white small"></i><span>{{:: currentUser.username}}</span></a>
+                </li>
+                <li>
+                    <i class="fa fa-map-marker fa-white small"></i><span>{{:: currentUser.currentLocation | translate}}</span>
+                </li>
+                <li>
+                    <a log-out><i class="fa fa-power-off fa-white small"></i><span class="nav-link">{{::'REGISTRATION_LABEL_LOGOUT' | translate}}</span></a>
+                </li>
+            </ul>
+        </div>
+</header>

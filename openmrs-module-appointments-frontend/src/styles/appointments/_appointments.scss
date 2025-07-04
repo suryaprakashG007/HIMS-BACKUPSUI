@@ -1,0 +1,93 @@
+.bahmni-appointments .opd-header-wrapper header ul li a.back-btn-noIcon {
+  padding: 14px 30px !important;
+  margin: 5px 10px 0 !important;
+  border-radius: 30px;
+  &.active {
+    background: #F1F5F9;
+    color: #061436;
+    font-family: OpenSans;
+  }
+}
+/*------ page style-------*/
+
+.opd-wrapper.appointments-page-wrapper {
+  min-height: auto;
+  padding: 65px 0 0;
+  overflow: visible;
+  background: #fff;
+  .appointments-content-wrapper {
+    max-width: 100%;
+  }
+}
+
+/*------ Base layout style-------*/
+
+.add-service-wrapper, .service-admin-wrapper {
+  border-radius: 7px;
+  margin: 20px 10px;
+  overflow: hidden;
+  height: calc(100vh - 78px);
+  background: #fff;
+  .service-title {
+    font-family: OpenSans, Arial, sans-serif;
+    padding: 16px;
+    margin: 0px 0 10px;
+    font-size: 16px;
+    clear: both;
+    background: rgba(26, 87, 232, 0.15);
+    font-weight: 500;
+    position: relative;
+    border-radius: 2px 2px 0 0;
+    h2 {
+      margin: 0;
+      padding: 0;
+      color: rgba(0, 0, 0, 1);
+      font-weight: 600;
+      font-size: 16px;
+      text-decoration: none !important;
+    }
+  }
+  .add-service-btn, .service-save-btn {
+    float: right;
+    background: rgba(26, 87, 232, 1);
+    border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 10px;
+  }
+  .add-service-btn {
+    margin: 0 10px 10px 0;
+  }
+  .service-save-btn {
+    position: absolute;
+    right: 5px;
+    top: 4px;
+    font-size: 14px;
+    padding: 5px 20px;
+  }
+}
+.app-patient-search {
+  position: absolute;
+  top: 63px;
+  z-index: 10;
+  right: 175px;
+  input {
+    color: #363463;
+    padding: 2px 25px 2px 10px;
+    margin: 15px 0 0 5px;
+    background-color: #FFF;
+    border: 1px solid #DDD;
+    box-sizing: border-box;
+    height: 37px;
+    border-radius: 5px;
+    width: 210px;
+  }
+  i {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin-top: 15px;
+    line-height: 2;
+    right: 5px;
+  }
+}

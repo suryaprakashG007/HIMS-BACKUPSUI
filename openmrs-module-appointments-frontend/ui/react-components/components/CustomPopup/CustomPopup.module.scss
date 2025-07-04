@@ -1,0 +1,15 @@
+.customPopup {
+
+  div[class^='popup-content'] {
+    margin-top: 7% !important;
+    width: 470px !important;
+  }
+}
+
+.conflictsPopup{
+  div[class^='popup-content'] {
+    margin: 3% 0 0 35% !important;
+    width: 65% !important;
+    height: auto;
+  }
+}

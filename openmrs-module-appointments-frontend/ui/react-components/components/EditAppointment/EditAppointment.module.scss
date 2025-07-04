@@ -1,0 +1,43 @@
+.editAppointment {
+  .currentTimeSlot {
+    margin-top: 15px;
+    font-size: 16px;
+    margin-bottom: 50px;
+  }
+  .recurringDetailsEdit {
+    > div {
+      margin-bottom: 35px;
+      .recurringTerminationDetails {
+        > div {
+          margin-bottom: 15px;
+        }
+      }
+      .weekDaySelector {
+        margin: 10px 0;
+      }
+    }
+    .recurringEndDateContainer {
+      > div {
+        display: flex;
+      }
+      .recurringEndDateLabel {
+        font-size: 16px;
+      }
+      .dateText {
+        &:before {
+          content: "|";
+          padding: 3px;
+        }
+      }
+    }
+
+  }
+
+  .appointmentPlanContainer {
+    width: 70%;
+    margin-bottom: 25px;
+  }
+}
+.recurring{
+   min-height: 140%;
+ }

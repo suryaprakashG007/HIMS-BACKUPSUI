@@ -1,0 +1,115 @@
+@import '../../variables.scss';
+@import "../AppointmentEditorCommonFieldsWrapper/AppointmentEditorCommonFieldsWrapper.module";
+
+.appointmentEditor {
+  width: 100%;
+  z-index: 31;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 0 16px 80px;
+  -webkit-box-sizing: border-box;
+  background-color: $secondary-color-1;
+
+  .recurringContainer {
+    padding: 0 2% 3% 2%;
+    display: flex;
+    justify-content: space-between;
+
+    .recurringContainerLeft {
+      width: 70%;
+      display: flex;
+      flex-wrap: wrap;
+      > div {
+        width: calc(100% / 3 - 30px);
+        margin-bottom: 25px;
+        margin-right: 30px;
+      }
+
+      .weekDaysContainer {
+        margin: {
+          top: 4%;
+        }
+      }
+
+      .timeSelector {
+        margin-top: 15%;
+      }
+    }
+
+    .recurringContainerRight {
+      width: 30%;
+    }
+  }
+
+  .apiErrorContainer {
+    padding: 0% 2%;
+  }
+}
+
+.dateHeading {
+  height: 22px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+}
+
+.appointmentTypeContainer {
+  top: 50px;
+  position: relative;
+  padding: 1% 2% 0 2%;
+  display: flex;
+  justify-content: space-between;
+
+  &:nth-child(2) {
+    padding-top: 0;
+  }
+}
+
+.overlay {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  top: 112px;
+  min-width: 540px;
+  z-index: 499;
+  display: flex;
+  align-items: center;
+  overflow: scroll;
+  box-shadow: -1px 2px 3px 0px #aaa;
+}
+
+.close {
+  border: none;
+  text-align: right;
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.inlineBlock{
+  display: inline-block;
+}
+
+.teleconsultation{
+  padding: 10px;
+}
+
+.firstBlock{
+  width: 100px;
+}
+.tableWrapper{
+  tr{
+    border-bottom: none;
+  }
+  tr > td{
+    border: none;
+    padding: 2px;
+  }
+}
+.recurringContainerBlock > *{
+  display: inline-block;
+}

@@ -1,0 +1,129 @@
+@import '../../variables.scss';
+
+.customHeaderWrapper {
+  &:focus{
+    outline: none;
+  }
+  width: 100%;
+  display: flex;
+  .monthYearDropdownLabel {
+    padding: 0.6em 0.6em 0.6em 0.8em;
+    flex: 1;
+    text-align: left;
+    color: $color-datepicker-content-color;
+    &:hover{
+      color: $primary-color-1;
+      cursor: pointer;
+      label{
+        cursor: pointer;
+      }
+    }
+  }
+
+  .monthYearDatePickerContainer {
+    padding-top: 5px;
+    width: 100%;
+    position: absolute;
+    top: -3.2em;
+    margin-left: -1px;
+  }
+
+  .monthYearDatePicker {
+    width: 100%;
+    font-size: 14px;
+
+    div[class*='react-datepicker__month--selected'] {
+      background-color: $primary-color-1;
+      &:hover {
+        color: $color-datepicker-content-color;
+      }
+    }
+
+    div[class*='react-datepicker__month-text'] {
+      &:hover {
+        background-color: $primary-color-1-lighter;
+      }
+    }
+
+    div[class*='react-datepicker-year-header'] {
+      padding: 0.7em;
+    }
+
+    div[class*='react-datepicker__monthPicker'] {
+      padding: 2em 0;
+    }
+
+    div[class*='react-datepicker__month-wrapper'] {
+      display: flex;
+      justify-content: space-evenly;
+    }
+
+    div[class*='react-datepicker__month-text'] {
+      padding: 1em 0;
+    }
+
+    button[class*='react-datepicker__navigation--next'] {
+      border-left-color: $color-datepicker-content-color;
+      &:hover {
+        border-left-color: $primary-color-1;
+        border: 0.45rem solid $primary-color-1;
+        background: none;
+        border-right-color: transparent;
+        border-top-color: transparent;
+        border-bottom-color:transparent;
+      }
+      &:focus{
+        outline: none;
+      }
+    }
+
+    button[class*='react-datepicker__navigation--previous']{
+      border-right-color: $color-datepicker-content-color;
+      &:hover{
+        border-right-color: $primary-color-1;
+        border: 0.45rem solid $primary-color-1;
+        background: none;
+        border-left-color: transparent;
+        border-top-color: transparent;
+        border-bottom-color:transparent;
+      }
+      &:focus{
+        outline: none;
+      }
+    }
+  }
+
+  .calendarNavigation {
+    color: $color-datepicker-content-color;
+    font-size: 16px;
+    flex: 1;
+    padding: 0.4em;
+    text-align: right;
+    .arrow {
+      margin: 8px;
+
+      &:hover {
+        color: $primary-color-1;
+        cursor: pointer;
+      }
+    }
+
+    .currentDateCircle {
+      margin: 8px;
+      &:hover {
+        color: $primary-color-1;
+        cursor: pointer;
+      }
+    }
+
+    .disable {
+      cursor: not-allowed;
+      color: $disable-color;
+      &:hover {
+        color: $disable-color;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+

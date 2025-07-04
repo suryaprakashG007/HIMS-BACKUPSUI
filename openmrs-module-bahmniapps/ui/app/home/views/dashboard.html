@@ -1,0 +1,229 @@
+<style>
+    .dashboard .apps ul {
+  max-width: 520px;
+}
+/* line 649, home/_home.scss */
+.dashboard .apps ul li a {
+  width: 130px;
+  box-shadow: none;
+  padding: 10px 10px 20px;
+}
+.apps li:nth-child(1) a { background: #9261FF26 !important; }
+.apps li:nth-child(2) a { background: #FA763226; }
+.apps li:nth-child(3) a { background: #3FC2E526; }
+.apps li:nth-child(4) a { background: #2784FF26; }
+.apps li:nth-child(5) a { background: #F249CE26; }
+.apps li:nth-child(6) a { background: #EBB42F26; }
+.apps li:nth-child(7) a { background: #16C48826 !important;  }
+.apps li:nth-child(8) a { background: rgba(255, 205, 210, 0.3); }
+.apps li:nth-child(9) a { background: #16C48826 !important }
+.apps li:nth-child(10) a { background: rgba(220, 237, 200, 0.3); }
+.apps li:nth-child(11) a { background: rgba(227, 242, 253, 0.3); }
+/* line 653, home/_home.scss */
+.dashboard .apps ul li a i {
+  margin-bottom: 5px;
+}
+/* line 656, home/_home.scss */
+.dashboard .apps ul li a.button {
+  min-height: 115px !important;
+}
+
+@media screen and (max-width: 520px) {
+  .dashboard .apps {
+    width: 100%;
+    margin: 80px auto;
+  }
+  
+  /* Make ul full width and remove max-width constraint */
+  .dashboard .apps ul {
+    max-width: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Add spacing between items */
+  }
+  
+  /* Each list item takes full width */
+  .dashboard .apps ul li {
+    width: 100%;
+    max-width: 250px; /* Optional: set a reasonable max-width */
+  }
+  
+  .dashboard .apps ul li a {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 16px;
+    padding: 15px; /* Add some padding for better touch targets */
+  }
+  
+  .dashboard .apps ul li a span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 899px) and (min-width: 521px) {
+   .dashboard .apps {
+    width: 100%;
+    margin: 80px auto;
+  }
+  /* line 665, home/_home.scss */
+  .dashboard .apps ul {
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap; /* optional: wraps items if they don't fit in one line */
+    column-gap: 50px;  /* Reduced gap for better spacing */
+    row-gap: 40px;         
+    justify-content: center; /* or space-between, space-around, space-evenly */
+  }
+
+  .dashboard .apps ul li a {
+    width: 270px; /* Reduced width for better fit */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 16px;
+  }
+  
+  .dashboard .apps ul li a span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .dashboard .apps ul li a.button {
+    min-height: 140px !important;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  /* line 672, home/_home.scss */
+  .dashboard .apps {
+    width: 100%;
+    margin: 7% auto;
+  }
+  /* line 676, home/_home.scss */
+  .dashboard .apps ul {
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap; /* optional: wraps items if they don't fit in one line */
+    column-gap: 50px;  /* Only horizontal spacing */
+    row-gap: 50px;         /* No vertical spacing */
+    justify-content: center; /* or space-between, space-around, space-evenly */
+    
+  }
+  /* line 679, home/_home.scss */
+  .dashboard .apps ul li a {
+    width: 270px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  /* line 681, home/_home.scss */
+  .dashboard .apps ul li a.button {
+    min-height: 140px !important;
+  }
+  /* line 684, home/_home.scss */
+  .dashboard .apps ul li a i {
+    margin-bottom: 5px;
+  }
+  
+  .dashboard .apps ul li a span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.change-location select, .change-location select:focus {
+    background: #FFFFFF1C;
+    color: #FFFFFF;
+    border:none;
+    border-radius: 26.5px;
+    height: 40px;
+}
+
+.dashboard header .btn-user-info {
+    background: #FFFFFF1C;
+    padding: 17px 16px;
+    border: none;
+    border-radius: 26.5px;
+    margin-left: 10px;
+}
+</style>
+
+
+<div class="dashboard">
+    <header class="reg-header" style="height: 60px;">
+        <div class="reg-header-right fr">
+            <form class="change-location fl">
+                <select  ng-model="selectedLocationUuid" ng-change="onLocationChange()">
+                    <option ng-repeat="location in locations | orderBy:'display'" ng-selected="isCurrentLocation(location)" value="{{location.uuid}}">
+                        {{location.display | translate}}
+                    </option>
+                </select>
+            </form>
+            <!-- Mujir/Vikash - to be introduced when we do retrospective entry for registration and other modules -->
+            <!--<input class="retro-date-widget fr" type="date"/>-->
+
+           <button class="btn-user-info fr" style="margin-top: 13px; height: 35px;width:65px; align-items: center; justify-items: center; display: flex; padding: 0; gap: 5px;">
+            <img src="/bahmni/images/Doctor.png" alt="doctor" style="width: 35px; height: 35px; margin-left: 0px;">
+            <i class="fa fa-caret-down fa-white mini"></i>
+            </button>
+
+            <ul style="background: #061436;">
+                <li ng-show=currentUser.username>
+                    <a class="disabled">
+                        <i class="fa fa-user-md fa-white small"></i>
+                        <span ng-bind="currentUser.username"></span>
+                    </a>
+                </li>
+                <li>
+                    <i class="fa fa-key fa-white small"></i>
+                    <a ng-click="changePassword()"><span>{{'CHANGE_PASSWORD' | translate}}</span></a>
+                </li>
+                <li ng-show=currentUser.currentLocation>
+                    <a class="disabled">
+                        <i class="fa fa-map-marker fa-white small"></i>
+                        <span ng-bind="currentUser.currentLocation | translate"></span>
+                    </a>
+                </li>
+                <li>
+                    <a log-out><i class="fa fa-power-off fa-white small"></i><span class="nav-link">{{'HEADER_LABEL_LOGOUT_KEY' | translate}}</span></a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="apps">
+        <ul>
+           <li ng-repeat="extn in appExtensions" >
+            <a id="{{extn.id}}" ng-href="{{extn.url}}" class="button app big" target="{{extn.target?extn.target:'_self'}}" ng-if="isVisibleExtension(extn)" >
+            <span ng-if="extn.iconImage" style="display: flex;flex-direction: column; margin-top: 20px;">
+            <img ng-src="{{extn.iconImage}}" alt="{{extn.translationKey}}" style="width: 58px; height: 58px; margin-right: 10px;">
+            </span>
+            <span ng-if="!extn.iconImage">
+            <i class="{{extn.icon}}"></i>
+            </span>
+            <p style="margin-top: 20px;">
+            {{extn | titleTranslate}}
+            </p>
+            </a>
+            </li>
+
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+@import '../../variables.scss';
+$customBoxShadow:0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+.newTag{
+  display: inline-block;
+}
+.tag {
+  display: flex;
+  flex-wrap: wrap;
+
+  .tagHolder {
+    background-color: $primary-color-1;
+    border-radius: 4px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 10px 10px 0 0;
+    min-width: 0;
+    box-sizing: border-box;
+    max-width: fit-content;
+
+    .tagLabel {
+      -webkit-align-items: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      border-radius: 2px;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      box-sizing: border-box;
+      color: #fff;
+      font-size: 12px;
+      padding: 4px 2px 4px 8px;
+    }
+
+    .tagRemove {
+      color: $secondary-color-1;
+      padding: 0 6px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .tagRemove:hover {
+      background-color: #0000004d;
+    }
+  }
+
+  .disable {
+    cursor: not-allowed;
+    opacity: 0.8;
+    i {
+      pointer-events: none;
+    }
+  }
+}
+
+//Tags styles are different in filter appointments
+.customTag {
+  @extend .tag;
+  flex-direction: column;
+  position: relative;
+  .customTagHolder{
+    @extend .tagHolder;
+      background-color: #fff !important;
+  }
+  .customTagLabel{
+    @extend .tagLabel;
+      color: $secondary-color-2 !important;
+      padding: 6px !important;
+      box-shadow: $customBoxShadow;
+  }
+  .customTagRemove{
+    position: absolute;
+    right: 5px;
+  }
+}
+

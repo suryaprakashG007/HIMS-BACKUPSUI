@@ -1,0 +1,33 @@
+@import '../../variables.scss';
+
+.dateTextHolder {
+  position: relative;
+}
+
+.dateInputClear {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.dateInputBox {
+  width: 100%;
+  padding: 6px 10px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  box-sizing: border-box;
+}
+
+.disable {
+  cursor: not-allowed;
+
+  &:hover {
+    cursor: not-allowed;
+  }
+}

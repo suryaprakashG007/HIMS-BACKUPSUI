@@ -1,0 +1,56 @@
+@import '../../variables.scss';
+
+input[type="radio"] {
+  appearance: none;
+  margin: 0 10px 0 0;
+  width: 12px;
+  height: 12px;
+  box-shadow: inset 0 0 0 .2em white,
+  0 0 0 .1em;
+  border-radius: 50%;
+  transition: .2s;
+  cursor: pointer;
+  color: $border-color;
+
+  &:checked {
+    background: $primary-color-1;
+    box-shadow: inset 0 0 0 .2em white,
+    0 0 0 .1em $primary-color-1;
+  }
+}
+
+.radioButton {
+  display: flex;
+  margin: 5% 4% 4% 0;
+  align-items: center;
+  height: 20px;
+
+  div {
+    display: flex;
+  }
+  input {
+    min-width: 12px;
+  }
+
+}
+
+.grayOut {
+  opacity: 0.6;
+  display: flex;
+  margin: 5% 4% 4% 0;
+  align-items: center;
+  height: 20px;
+}
+
+div[disabled] {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+
+.dateText {
+  &:before {
+    content: "|";
+    padding: 3px;
+  }
+}
