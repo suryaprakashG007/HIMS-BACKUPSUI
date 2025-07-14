@@ -8,17 +8,16 @@
   box-shadow: none;
   padding: 10px 10px 20px;
 }
-.apps li:nth-child(1) a { background: #9261FF26 !important; }
-.apps li:nth-child(2) a { background: #FA763226; }
-.apps li:nth-child(3) a { background: #3FC2E526; }
-.apps li:nth-child(4) a { background: #2784FF26; }
-.apps li:nth-child(5) a { background: #F249CE26; }
-.apps li:nth-child(6) a { background: #EBB42F26; }
-.apps li:nth-child(7) a { background: #16C48826 !important;  }
-.apps li:nth-child(8) a { background: rgba(255, 205, 210, 0.3); }
-.apps li:nth-child(9) a { background: #16C48826 !important }
-.apps li:nth-child(10) a { background: rgba(220, 237, 200, 0.3); }
-.apps li:nth-child(11) a { background: rgba(227, 242, 253, 0.3); }
+.apps li:nth-child(1) a { background: rgba(146, 97, 255, 0.15)!important; }
+.apps li:nth-child(2) a { background: rgba(22, 196, 136, 0.15) }
+.apps li:nth-child(3) a { background: rgba(242, 73, 206, 0.15)}
+.apps li:nth-child(4) a { background: rgba(63, 194, 229, 0.15) }
+.apps li:nth-child(5) a { background: rgba(97, 102, 255, 0.15) }
+.apps li:nth-child(6) a { background: rgba(255, 97, 100, 0.15) }
+.apps li:nth-child(7) a { background: rgba(235, 180, 47, 0.15) !important;  }
+.apps li:nth-child(8) a { background: rgba(250, 118, 50, 0.15); }
+.apps li:nth-child(9) a { background: rgba(250, 118, 50, 0.15)!important }
+
 /* line 653, home/_home.scss */
 .dashboard .apps ul li a i {
   margin-bottom: 5px;
@@ -26,6 +25,21 @@
 /* line 656, home/_home.scss */
 .dashboard .apps ul li a.button {
   min-height: 115px !important;
+}
+.reg-wrapper header ul li a {
+    color: #000000;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+.dashboard header .btn-user-info + ul li {
+    float: left;
+    clear: both;
+    text-align: left;
+    padding-left: 10px;
+    border-bottom: none !important;
+    margin: 0;
+    vertical-align: middle;
 }
 
 @media screen and (max-width: 520px) {
@@ -185,25 +199,27 @@
             <i class="fa fa-caret-down fa-white mini"></i>
             </button>
 
-            <ul style="background: #061436;">
+            <ul style="background: #FFFFFF;border: #00000026;">
                 <li ng-show=currentUser.username>
-                    <a class="disabled">
-                        <i class="fa fa-user-md fa-white small"></i>
+                    <a class="disabled" style="color: #000000;display: flex;gap: 10px;align-items: center;">
+                        <img src="/bahmni/images/Supermanicon.png" alt="name" style="width: 17px;height: 17px;">
                         <span ng-bind="currentUser.username"></span>
                     </a>
                 </li>
                 <li>
-                    <i class="fa fa-key fa-white small"></i>
+                    <div style="display: flex;gap: 10px;align-items: center;">
+                    <img src="/bahmni/images/Keyicon.png" alt="password" style="width: 17px;height: 17px;">
                     <a ng-click="changePassword()"><span>{{'CHANGE_PASSWORD' | translate}}</span></a>
+                    </div>
                 </li>
                 <li ng-show=currentUser.currentLocation>
-                    <a class="disabled">
-                        <i class="fa fa-map-marker fa-white small"></i>
+                    <a class="disabled" style="color: #000000;display: flex;gap: 10px;align-items: center;">
+                        <img src="/bahmni/images/Mapicon.png" alt="location" style="width: 17px;height: 17px;">
                         <span ng-bind="currentUser.currentLocation | translate"></span>
                     </a>
                 </li>
                 <li>
-                    <a log-out><i class="fa fa-power-off fa-white small"></i><span class="nav-link">{{'HEADER_LABEL_LOGOUT_KEY' | translate}}</span></a>
+                    <a log-out style="display: flex;gap: 10px;align-items: center;"><img src="/bahmni/images/Logouticon.png" alt="logout" style="width: 17px;height: 17px;"><span class="nav-link">{{'HEADER_LABEL_LOGOUT_KEY' | translate}}</span></a>
                 </li>
             </ul>
         </div>

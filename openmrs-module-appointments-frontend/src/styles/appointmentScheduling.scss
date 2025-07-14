@@ -47,3 +47,29 @@
 @import "appointments/appSummary";
 @import "appointments/autoComplete";
 @import "appointments/components";
+
+
+.ngdialog.ngdialog-theme-default.ng-scope .ngdialog-content .confirm-box .actions button {
+    color: #FFFFFF;
+    border: none !important;
+    margin-right: 10px;
+    text-transform: capitalize;
+}
+
+/* Specific background for OK button */
+.ngdialog.ngdialog-theme-default.ng-scope .ngdialog-content .confirm-box .actions button#ok {
+    background: blue;
+}
+
+/* Specific background for Cancel button */
+.ngdialog.ngdialog-theme-default.ng-scope .ngdialog-content .confirm-box .actions button#cancel {
+    background: rgba(197, 198, 200, 1) !important;
+}
+
+button#modal-revise-button1 {
+    background: blue;
+}
+button#modal-revise-button2 {
+    background: rgba(197, 198, 200, 1) !important;
+    border: none !important;
+}

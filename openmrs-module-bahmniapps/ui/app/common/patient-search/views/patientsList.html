@@ -151,15 +151,15 @@
     <div class="tabs">
         <scrollable-tabs>
             <ul>
-                <li class="tab-1" ng-repeat="searchType in search.searchTypes"
-                    ng-class="{'tab-selected': search.isSelectedSearch(searchType)}">
-                    <a href="" ng-click="search.switchSearchType(searchType)">
-                        <span>{{::searchType | titleTranslate}} </span>
-                        <span ng-if="search.showPatientCountOnSearchParameter(searchType)">({{search.searchResults.length}})</span>
-                        <span ng-if="(searchType.handler && !search.showPatientCountOnSearchParameter(searchType))" scheduler
-                            watch-on="search.searchParameter" refresh-time="searchType.refreshTime">({{searchType.patientCount}})</span>
-                    </a>
-                </li>
+                    <li class="tab-1" ng-repeat="searchType in search.searchTypes" ng-class="{'tab-selected': search.isSelectedSearch(searchType)}">
+            <a href="" ng-click="search.switchSearchType(searchType)">
+                <span>{{ $first ? 'Active Patients' : 'All' }}</span>
+                <span ng-if="search.showPatientCountOnSearchParameter(searchType)">({{search.searchResults.length}})</span>
+                <span ng-if="(searchType.handler && !search.showPatientCountOnSearchParameter(searchType))" scheduler watch-on="search.searchParameter"
+                    refresh-time="searchType.refreshTime">({{searchType.patientCount}})
+                </span>
+            </a>
+            </li>
             </ul>
         </scrollable-tabs>
         <button ng-if="search.searchType.showPrint" class="dialog-button-group" ng-click="printPage()"

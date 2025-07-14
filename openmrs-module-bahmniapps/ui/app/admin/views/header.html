@@ -25,6 +25,19 @@
     margin-right: 15px;
     margin-top: 0px;    
   }
+  .user-actions + ul li, .opd-header-wrapper header .btn-user-info + ul li {
+    float: left;
+    clear: both;
+    text-align: left;
+    border-bottom: none !important;
+    margin: 0;
+}
+.user-actions + ul li a, .opd-header-wrapper header .btn-user-info + ul li a {
+    padding: 10px 5px;
+    display: inline-block;
+    min-width: 120px;
+    color: #fff;
+}
 </style>
  
 <div class="opd-header-wrapper" style="background: #061436;">
@@ -42,9 +55,9 @@
             </button>
             <ul>
                 <li>
-                    <a log-out>
-                        <i class="fa fa-power-off fa-white small"></i>
-                        <span class="nav-link">{{::'LOGOUT_TRANSLATION_KEY' | translate}}</span>
+                    <a log-out style="background: #FFFFFF;border:1px solid #00000026;color: #000000;display: flex;gap: 10px;align-items: center;">
+                        <img src="/bahmni/images/Logouticon.png" alt="logout" style="width: 17px;height: 17px;">
+                        <span class="nav-link" style="font-weight: bold;">{{::'LOGOUT' | translate}}</span>
                     </a>
                 </li>
             </ul>

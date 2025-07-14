@@ -457,6 +457,7 @@ body {
                 .form-builder-tooltip-trigger {
                     float: right;
                     margin-top: 8px;
+                    
                 }
             }
 
@@ -559,4 +560,12 @@ body {
         }
     
     }
+}
+
+.fl {
+    background: none !important;
+}
+.form-builder-comment-toggle {
+    background: none !important;
+    border: none !important;
 }

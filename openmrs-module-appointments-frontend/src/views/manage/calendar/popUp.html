@@ -1,3 +1,24 @@
+<style>
+    .app-dialog-container.ngdialog.ngdialog-theme-default .ngdialog-content .app-dialog-btn-wrap button {
+        padding: 8px 10px;
+        border-radius: 3px;
+        box-shadow: none !important;
+        transition: none !important;
+        color: rgba(255, 255, 255, 1) !important;
+        display: inline-block;
+        margin-left: 10px;
+    }
+    .app-dialog-container.ngdialog.ngdialog-theme-default .ngdialog-content .app-dialog-btn-wrap button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    color: black !important;
+}
+.app-dialog-container.ngdialog.ngdialog-theme-default .ngdialog-content .app-dialog-btn-wrap {
+    text-align: center;
+    margin: 10px 0 0;
+}
+</style>
+
 <div class="confirm-box">
     <div class="ngdialog-close clearfix"></div>
 
@@ -39,43 +60,43 @@
         <button ng-click="copyTeleConsultationMeetingURL(appointment)" class="copy-clip" title="{{::'COPY_LINK' | translate}}">
         </button>
       <p><b>  
-    <p class="app-dialog-btn-wrap">
-        <button show-if-privilege="{{manageAppointmentPrivilege}},{{ownAppointmentPrivilege}}" style="background: #039BE5"
+    <p class="app-dialog-btn-wrap" >
+        <button show-if-privilege="{{manageAppointmentPrivilege}},{{ownAppointmentPrivilege}}" style="background: rgba(97, 102, 255, 1);"
                 ng-show="isAppointmentRequestEnabled"
                 ng-disabled="!appointment || !isEditAllowed() || !isResponseAwaitingForCurrentProvider(appointment)"
                 ng-click="acceptAppointmentInviteForCurrentProvider(appointment)">
             {{::'ACCEPT_APPOINTMENT_REQUEST' | translate}}
         </button>
-        <button show-if-privilege="{{manageAppointmentPrivilege}},{{ownAppointmentPrivilege}}" style="background: #039BE5"
+        <button show-if-privilege="{{manageAppointmentPrivilege}},{{ownAppointmentPrivilege}}" style="background: rgba(97, 102, 255, 1);"
                 ng-disabled="!appointment || !isEditAllowed()"
                 ng-click="navigateTo('edit', appointment)">
             {{::'EDIT_APPOINTMENT' | translate}}
         </button>
-        <button show-if-privilege="{{manageAppointmentPrivilege}},{{ownAppointmentPrivilege}}" style="background: #009688"
+        <button show-if-privilege="{{manageAppointmentPrivilege}},{{ownAppointmentPrivilege}}" style="background: rgba(111, 66, 193, 1);"
                 ng-show="isAllowedAction('CheckedIn')"
                 ng-disabled="!appointment || !isValidActionAndIsUserAllowedToPerformEdit(appointment, 'CheckedIn')"
                 ng-click="checkinAppointment(appointment)">
             {{::'CHECK_IN_APPOINTMENT' | translate}}
         </button>
-        <button show-if-privilege="{{manageAppointmentPrivilege}},{{ownAppointmentPrivilege}}" style="background: #43A047"
+        <button show-if-privilege="{{manageAppointmentPrivilege}},{{ownAppointmentPrivilege}}" style="background: rgba(40, 167, 69, 1);"
                 ng-show="isAllowedAction('Completed')"
                 ng-disabled="!appointment || !isValidActionAndIsUserAllowedToPerformEdit(appointment, 'Completed')"
                 ng-click="confirmAction(appointment, 'Completed')">
             {{::'COMPLETE_APPOINTMENT' | translate}}
         </button>
-        <button show-if-privilege="{{manageAppointmentPrivilege}},{{ownAppointmentPrivilege}}" style="background: #FF9800"
+        <button show-if-privilege="{{manageAppointmentPrivilege}},{{ownAppointmentPrivilege}}" style="background: rgba(255, 193, 7, 1);"
                 ng-show="isAllowedAction('Missed')"
                 ng-disabled="!appointment || !isValidActionAndIsUserAllowedToPerformEdit(appointment, 'Missed')"
                 ng-click="confirmAction(appointment, 'Missed')">
             {{::'MISSED_APPOINTMENT' | translate}}
         </button>
-        <button show-if-privilege="{{manageAppointmentPrivilege}},{{ownAppointmentPrivilege}}" style="background: #DD2C00"
+        <button show-if-privilege="{{manageAppointmentPrivilege}},{{ownAppointmentPrivilege}}" style="background: rgba(220, 53, 69, 1);"
                 ng-show="isAllowedAction('Cancelled')"
                 ng-disabled="!appointment || !isValidActionAndIsUserAllowedToPerformEdit(appointment, 'Cancelled')"
                 ng-click="confirmAction(appointment, 'Cancelled')">
             {{::'CANCEL_APPOINTMENT' | translate}}
         </button>
-        <button show-if-privilege="{{manageAppointmentPrivilege}},{{ownAppointmentPrivilege}}" style="background: #8BC34A"
+        <button show-if-privilege="{{manageAppointmentPrivilege}},{{ownAppointmentPrivilege}}" style="background: rgba(0, 123, 255, 1)"
                 ng-show="scope.enableCreateAppointment"
                 ng-disabled="!isUserAllowedToPerformEdit()"
                 ng-click="navigateTo('new')">

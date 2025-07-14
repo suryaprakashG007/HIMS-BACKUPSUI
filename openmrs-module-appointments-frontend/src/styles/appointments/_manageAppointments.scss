@@ -551,6 +551,7 @@
   }
   .fc-event {
     min-height: 15px;
+    line-height: 1.7;
   }
   .calendar-no-appointment {
     text-align: center;
@@ -591,7 +592,7 @@
       button {
         @extend .appBtn;
         border: none;
-        color: #fff;
+        color: black !important;
         margin-bottom: 0.5em;
 
         &:disabled {

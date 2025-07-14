@@ -1,4 +1,4 @@
-Note: The below html brought back from two sub-html into this one html because bm-back-link directive is not getting statechangesuccess event
+<!-- Note: The below html brought back from two sub-html into this one html because bm-back-link directive is not getting statechangesuccess event -->
 
 
 <div ng-show="!stateChange()">
@@ -8,10 +8,10 @@ Note: The below html brought back from two sub-html into this one html because b
             <div class="hidden-mobile">
                 <bm-back-links></bm-back-links>
                 <recent-patients ng-if="enablePatientSearch()" triggred-by-button></recent-patients>
-                <a show-if-privilege="{{adtNavigationConfig.privilege}}" ng-click= "displayConfirmationDialog($event)" class="back-btn" ng-href="{{adtNavigationURL(consultation.uuid)}}"
+                <!-- <a show-if-privilege="{{adtNavigationConfig.privilege}}" ng-click= "displayConfirmationDialog($event)" class="back-btn" ng-href="{{adtNavigationURL(consultation.uuid)}}"
                 title="{{adtNavigationConfig.title}}">
                     <i class="fa fa-bed fa-white"></i>
-                </a>
+                </a> -->
                 <a class="back-btn-link" id="dashboard-link" accesskey="d" ng-click="gotoPatientDashboard()" title="Back to {{patient.name}} Dashboard">
                     <img class="patient-image" ng-src="{{::patient.image}}" fallback-src="../images/blank-user.gif">
                 <span class="patient-info">
@@ -50,10 +50,10 @@ Note: The below html brought back from two sub-html into this one html because b
         <div class="opd-header-bottom tabs hidden-mobile">
             <bm-back-links ></bm-back-links>
             <recent-patients triggered-by-button></recent-patients>
-            <a show-if-privilege="{{adtNavigationConfig.privilege}}" ng-click= "displayConfirmationDialog($event)" class="back-btn" ng-href="{{adtNavigationURL(visitHistory.activeVisit.uuid)}}"
+            <!-- <a show-if-privilege="{{adtNavigationConfig.privilege}}" ng-click= "displayConfirmationDialog($event)" class="back-btn" ng-href="{{adtNavigationURL(visitHistory.activeVisit.uuid)}}"
                title="{{adtNavigationConfig.title}}">
                 <i class="fa fa-bed fa-white"></i>
-            </a>
+            </a> -->
             <div class="desktop-menu fl">
                 <ul class="header-tabs" ng-if="clinicalDashboardConfig.showTabs()">
                     <li class="tab-item dashboard" ng-repeat="dashboard in clinicalDashboardConfig.visibleTabs"
@@ -85,7 +85,7 @@ Note: The below html brought back from two sub-html into this one html because b
                 </div>
                 <div ng-if="::clinicalDashboardConfig.quickPrints" class="fl print-list-wrapper" toggle="togglePrintList">
                     <button ng-if="clinicalDashboardConfig.showPrint()" class="dialog-button-group"
-                            accesskey="{{'CLINICAL_PRINT_ACCESS_KEY'| translate}}">
+                            accesskey="{{'CLINICAL_PRINT_ACCESS_KEY'| translate}}" style="background: #f1f5f9 !important;">
                         <span ng-bind-html="'CLINICAL_PRINT_TRANSLATION_KEY'|translate"></span> <i class="fa fa-print"></i> <i class="fa fa-caret-down"></i>
                     </button>
                     <ul>

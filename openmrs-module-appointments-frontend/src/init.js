@@ -47,7 +47,7 @@ require("angular-translate-handler-log");
 require("ng-dialog/js/ngDialog");
 require("angular-elastic/elastic");
 require("angular-ivh-treeview");
-require("../lib/angular-workers/dist/angular-workers");
+
 
 require("./route-errorhandler");
 

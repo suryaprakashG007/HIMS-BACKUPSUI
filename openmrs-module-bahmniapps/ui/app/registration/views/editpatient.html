@@ -67,12 +67,26 @@
     margin-left: 5px;
   }
 
- .camera-btn {
-    background-image: url('../images/photo.png');
-    background-color: #1A57E8; /* Apply background color */
-    background-repeat: no-repeat; /* Prevent duplicate image */
-    background-position: center; /* Ensure image is centered */
-    background-size: contain; /* Ensure image fits inside the button */
+.photo-buttons .camera-btn {
+    /* Ensure the background image is applied correctly */
+    background-image: url('../images/photo.png') !important;
+    background-size: contain; /* Scales the image to fit the button while maintaining its aspect ratio */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents tiling */
+
+    /* Button styles */
+    font-size: 10px;
+    background-color: #1A57E8;
+    width: 50px; /* Adjust the width */
+    height: 28px; /* Adjust the height */
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    display: inline-block;
+    text-align: center;
+    line-height: 50px; /* Centers the text vertically */
+    padding: 10px;
 }
 
 
@@ -137,6 +151,12 @@
     border: 1px solid #476b6b;
     background: linear-gradient(to bottom, #FFFFFF33);
     border-radius: 100px;
+  }
+   .split-button:hover .primaryOption button:hover  {
+    background: #1A57E8 !important;
+  }
+  button.confirm {
+    background: #1A57E8 !important;
   }
   /* Media Queries for Responsiveness */
   @media screen and (max-width: 1024px) {
