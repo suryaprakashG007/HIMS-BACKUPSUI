@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: openmrs
-          image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/openmrs:latest
+          image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/openmrs:latest
           ports:
             - containerPort: 8080
       imagePullSecrets:

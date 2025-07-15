@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: proxy
-          image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/proxy:latest
+          image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/proxy:latest
           ports:
             - containerPort: 80
             - containerPort: 443
