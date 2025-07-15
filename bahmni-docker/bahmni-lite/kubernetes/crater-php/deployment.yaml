@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: crater-php
-          image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/crater-php
+          image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/crater-php:latest
           ports:
             - containerPort: 9000
       imagePullSecrets:

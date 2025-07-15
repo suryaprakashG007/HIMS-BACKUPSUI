@@ -24,7 +24,7 @@
       float: right;
       margin-left:10px;
       cursor: pointer;
-      color: #363463;
+      color: mediumblue;
       box-shadow: none;
       background: none;
       border: none;
@@ -32,8 +32,6 @@
       padding: 0;
       font-family: openSansSemiBold;
       &:hover , &:active , &:focus{
-        color: #5B8989;
-        text-decoration: underline;
         outline:none;
       }
     }
@@ -66,10 +64,10 @@
         tr{
           border: none;
           &:nth-child(odd){
-            background: #F9F4E7
+            background: rgba(252, 255, 243, 1)
           }
           &:nth-child(even){
-            background: #FFF;
+            background: rgba(245, 245, 245, 1);
           }
           td{
             border: none;
@@ -157,7 +155,7 @@
   margin-bottom: 10px;
   margin-right: 0.5%;
   width: 33%;
-  border: 1px solid #699;
+  border: 1px solid rgba(217, 219, 222, 1);
   border-radius: 5px;
   padding: 15px 10px;
   line-height: 1.35;
@@ -246,10 +244,10 @@
           pointer-events: none;
         }
         .label-bg {
-          fill: #ABA8A8;
+          fill: rgba(243, 248, 255, 1);
         }
         .label {
-          fill: #FFFFFF;
+          fill: rgba(0, 0, 0, 1);
         }
         .date {
           fill: #000000;

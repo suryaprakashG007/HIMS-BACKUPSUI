@@ -366,7 +366,9 @@ a.back-btn, button.back-btn {
           }
       }
 }
-
+#dashboard-link {
+  background: rgba(26, 87, 232, 1);
+}
 ul li a.back-btn, ul li a.back-btn:hover, button.back-btn, a.back-btn {
     padding: 8px 8px;
     background: #2B3754;
