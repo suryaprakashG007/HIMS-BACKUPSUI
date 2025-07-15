@@ -41,22 +41,6 @@
     margin: 0;
     vertical-align: middle;
 }
-.reg-header {
-  position: relative;
-}
-
-.reg-header .header-title {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 50%;
-  transform: translate(-50%, -50%);
-  margin: 0;
-  font-size: 1.3em;
-  color: rgba(255, 255, 255, 1); /* adjust color as needed */
-  font-weight: bold;
-}
-
 
 @media screen and (max-width: 520px) {
   .dashboard .apps {
@@ -198,7 +182,7 @@
 
 
 <div class="dashboard">
-    <header class="reg-header" style="height: 60px; position: relative;">
+    <header class="reg-header" style="height: 60px;">
         <div class="reg-header-right fr">
             <form class="change-location fl">
                 <select  ng-model="selectedLocationUuid" ng-change="onLocationChange()">

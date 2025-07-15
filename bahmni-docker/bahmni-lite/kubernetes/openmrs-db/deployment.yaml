@@ -28,4 +28,4 @@ spec:
             - name: MYSQL_DATABASE
               value: openmrs
       imagePullSecrets:
-        - name: ecr-registry-secret
+        - name: ecr-secret
