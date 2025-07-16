@@ -23,7 +23,7 @@ spec:
             - name: TZ
               value: "UTC"
             - name: OPENMRS_DB_HOST
-              value: "openmrsdb"
+              value: "openmrs-db"  # Make sure this matches your DB service name
             - name: OPENMRS_DB_PORT
               value: "3306"
             - name: OPENMRS_DB_NAME
@@ -33,8 +33,8 @@ spec:
             - name: OPENMRS_DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: openmrs-db-secret
-                  key: db-password
+                  name: mysql-secret
+                  key: user-password
             - name: OPENMRS_DB_TYPE
               value: "mysql"
             - name: OPENMRS_DOCKER_ENV
