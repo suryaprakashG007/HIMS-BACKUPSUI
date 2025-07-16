@@ -51,23 +51,27 @@ spec:
             - name: OPENMRS_MODULE_WEB_ADMIN
               value: "false"
             - name: OMRS_JAVA_SERVER_OPTS
-              value: ""
+              value: "-Xms512m -Xmx1024m"
             - name: OMRS_JAVA_MEMORY_OPTS
-              value: ""
+              value: "-Xms512m -Xmx1024m"
             - name: OPENMRS_UPLOAD_FILES_PATH
               value: "/usr/local/tomcat/openmrs-uploads"
           readinessProbe:
             httpGet:
               path: /openmrs
               port: 8080
-            initialDelaySeconds: 60
+            initialDelaySeconds: 120
             periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 10
           livenessProbe:
             httpGet:
               path: /openmrs
               port: 8080
-            initialDelaySeconds: 90
+            initialDelaySeconds: 150
             periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 5
           resources:
             limits:
               memory: "1024Mi"
@@ -78,6 +82,8 @@ spec:
           volumeMounts:
             - name: openmrs-uploads
               mountPath: /usr/local/tomcat/openmrs-uploads
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
       volumes:
         - name: openmrs-uploads
           emptyDir: {}
