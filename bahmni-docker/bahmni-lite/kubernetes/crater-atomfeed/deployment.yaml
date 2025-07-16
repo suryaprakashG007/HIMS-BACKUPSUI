@@ -22,6 +22,7 @@ spec:
           ports:
             - containerPort: 80
           env:
+            # Database Configuration
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:mysql://crater-atomfeed-db:3306/crater_atomfeed?useSSL=false&allowPublicKeyRetrieval=true"
             - name: SPRING_DATASOURCE_USERNAME
@@ -31,7 +32,8 @@ spec:
                 secretKeyRef:
                   name: crater-atomfeed-secrets
                   key: db_password
-
+ 
+            # OpenMRS Configuration
             - name: OPENMRS_URL
               value: "http://openmrs:8080/openmrs"
             - name: OPENMRS_ATOMFEED_USER
@@ -41,7 +43,8 @@ spec:
                 secretKeyRef:
                   name: crater-atomfeed-secrets
                   key: openmrs_atomfeed_password
-
+ 
+            # Crater Integration
             - name: CRATER_URL
               value: "http://crater-nginx"
             - name: CRATER_USERNAME
@@ -51,7 +54,8 @@ spec:
                 secretKeyRef:
                   name: crater-atomfeed-secrets
                   key: crater_password
-
+ 
+            # Mail Configuration
             - name: MAIL_SMTP_HOST
               value: "email-smtp.ap-south-1.amazonaws.com"
             - name: MAIL_SMTP_PORT
@@ -63,12 +67,13 @@ spec:
                 secretKeyRef:
                   name: crater-atomfeed-secrets
                   key: mail_password
-
+ 
+            # Application Settings
             - name: SERVER_PORT
               value: "80"
             - name: TZ
               value: "UTC"
-
+ 
           livenessProbe:
             httpGet:
               path: /actuator/health
@@ -76,14 +81,14 @@ spec:
             initialDelaySeconds: 120
             periodSeconds: 20
             failureThreshold: 3
-
+ 
           readinessProbe:
             httpGet:
               path: /actuator/health
               port: 80
             initialDelaySeconds: 30
             periodSeconds: 10
-
+ 
           resources:
             requests:
               memory: "512Mi"
@@ -91,6 +96,6 @@ spec:
             limits:
               memory: "1Gi"
               cpu: "500m"
-
+ 
       imagePullSecrets:
         - name: ecr-secret
