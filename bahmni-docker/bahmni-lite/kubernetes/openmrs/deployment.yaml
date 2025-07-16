@@ -26,8 +26,16 @@ spec:
               value: "openmrs-db"
             - name: OPENMRS_DB_PORT
               value: "3306"
-            - name: DB_HOST_PORT   # <== Added for wait-for-it.sh compatibility
+            - name: DB_HOST
+              value: "openmrs-db"
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_HOST_PORT
               value: "openmrs-db:3306"
+            - name: MYSQL_HOST
+              value: "openmrs-db"
+            - name: MYSQL_PORT
+              value: "3306"
             - name: OPENMRS_DB_NAME
               value: "openmrs"
             - name: OPENMRS_DB_USERNAME
@@ -61,11 +69,12 @@ spec:
               value: "-Xms512m -Xmx1024m"
             - name: OPENMRS_UPLOAD_FILES_PATH
               value: "/usr/local/tomcat/openmrs-uploads"
+          # Increase initial delay to give more time for database connection
           readinessProbe:
             httpGet:
               path: /openmrs
               port: 8080
-            initialDelaySeconds: 120
+            initialDelaySeconds: 180
             periodSeconds: 10
             timeoutSeconds: 5
             failureThreshold: 10
@@ -73,7 +82,7 @@ spec:
             httpGet:
               path: /openmrs
               port: 8080
-            initialDelaySeconds: 150
+            initialDelaySeconds: 300
             periodSeconds: 15
             timeoutSeconds: 5
             failureThreshold: 5
