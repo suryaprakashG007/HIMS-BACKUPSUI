@@ -16,8 +16,60 @@ spec:
     spec:
       containers:
         - name: crater-atomfeed
-          image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/crater-atomfeed:latest
+          image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/crater-atomfeed:1.0.0
           ports:
             - containerPort: 80
+          env:
+            # Database Configuration
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:mysql://crater-atomfeed-db:3306/crater_atomfeed"
+            - name: SPRING_DATASOURCE_USERNAME
+              value: "crater_atomfeed_user"
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: crater-atomfeed-secrets
+                  key: db_password
+            
+            # OpenMRS Configuration
+            - name: OPENMRS_URL
+              value: "http://openmrs:8080/openmrs"
+            - name: OPENMRS_ATOMFEED_USER
+              value: "admin"
+            - name: OPENMRS_ATOMFEED_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: openmrs-secrets
+                  key: atomfeed_password
+            
+            # Crater Integration
+            - name: CRATER_URL
+              value: "http://crater-nginx"
+            - name: CRATER_USERNAME
+              value: "superman@bahmni.org"
+            - name: CRATER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: crater-secrets
+                  key: password
+            
+            # Application Settings
+            - name: SERVER_PORT
+              value: "80"
+            - name: TZ
+              value: "UTC"
+            
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 80
+            initialDelaySeconds: 60
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 5
       imagePullSecrets:
         - name: ecr-secret
