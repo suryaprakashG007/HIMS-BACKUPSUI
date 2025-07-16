@@ -38,5 +38,7 @@ spec:
               value: "openmrs"
             - name: DB_PASSWORD
               value: "test"
+            - name: DB_WAIT_FOR
+              value: "openmrs-db:3306"   # this is the fix
           ports:
             - containerPort: 8080
