@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: implementer-interface
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: implementer-interface
   ports:

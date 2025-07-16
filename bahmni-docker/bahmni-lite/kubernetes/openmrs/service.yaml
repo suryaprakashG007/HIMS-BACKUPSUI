@@ -5,7 +5,7 @@ metadata:
   labels:
     app: openmrs
 spec:
-  type: ClusterIP  # Only accessible inside the cluster (default)
+  type: LoadBalancer  # Only accessible inside the cluster (default)
   selector:
     app: openmrs    # Matches the pod label
   ports:
