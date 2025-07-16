@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: patient-documents
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: patient-documents
   ports:
