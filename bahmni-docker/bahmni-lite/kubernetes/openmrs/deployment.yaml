@@ -27,8 +27,6 @@ spec:
       containers:
         - name: openmrs
           image: bahmni/openmrs:latest
-          command: ["sh", "-c"]
-          args: ["./start-bahmni.sh"]
           env:
             - name: DB_HOST
               value: "openmrs-db"
