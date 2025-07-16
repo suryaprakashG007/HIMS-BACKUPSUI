@@ -52,11 +52,7 @@ spec:
               value: "openmrs-db"
             - name: DATABASE_PORT
               value: "3306"
-            - name: WAIT_FOR_HOST
-              value: "openmrs-db"
-            - name: WAIT_FOR_PORT
-              value: "3306"
-            - name: WAIT_FOR
+            - name: WAIT_FOR_IT
               value: "openmrs-db:3306"
             - name: OPENMRS_DB_NAME
               value: "openmrs"
