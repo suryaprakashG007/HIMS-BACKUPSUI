@@ -31,7 +31,10 @@ spec:
             - name: OPENMRS_DB_USERNAME
               value: "openmrs-user"
             - name: OPENMRS_DB_PASSWORD
-              value: "password"
+              valueFrom:
+                secretKeyRef:
+                  name: openmrs-db-secret
+                  key: db-password
             - name: OPENMRS_DB_TYPE
               value: "mysql"
             - name: OPENMRS_DOCKER_ENV
