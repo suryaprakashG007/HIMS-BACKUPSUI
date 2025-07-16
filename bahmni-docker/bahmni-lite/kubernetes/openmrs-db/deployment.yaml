@@ -27,5 +27,12 @@ spec:
                   key: root-password
             - name: MYSQL_DATABASE
               value: openmrs
+            - name: MYSQL_USER
+              value: openmrs-user
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: user-password
       imagePullSecrets:
         - name: ecr-secret

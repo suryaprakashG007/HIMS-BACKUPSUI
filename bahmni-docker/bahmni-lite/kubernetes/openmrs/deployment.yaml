@@ -19,5 +19,65 @@ spec:
           image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/openmrs:latest
           ports:
             - containerPort: 8080
+          env:
+            - name: TZ
+              value: "UTC"
+            - name: OPENMRS_DB_HOST
+              value: "openmrsdb"
+            - name: OPENMRS_DB_NAME
+              value: "openmrs"
+            - name: OPENMRS_DB_USERNAME
+              value: "openmrs-user"
+            - name: OPENMRS_DB_PASSWORD
+              value: "password"
+            - name: OPENMRS_DB_TYPE
+              value: "mysql"
+            - name: OPENMRS_DOCKER_ENV
+              value: "true"
+            - name: OMRS_C3P0_MAX_SIZE
+              value: "50"
+            - name: OMRS_DB_EXTRA_ARGS
+              value: "&zeroDateTimeBehavior=convertToNull"
+            - name: LUCENE_MATCH_TYPE
+              value: "START"
+            - name: DOCUMENT_MAX_SIZE_MB
+              value: "7"
+            - name: OPENMRS_DB_CREATE_TABLES
+              value: "false"
+            - name: OPENMRS_DB_AUTO_UPDATE
+              value: "true"
+            - name: OPENMRS_MODULE_WEB_ADMIN
+              value: "false"
+            - name: OMRS_JAVA_SERVER_OPTS
+              value: ""
+            - name: OMRS_JAVA_MEMORY_OPTS
+              value: ""
+            - name: OPENMRS_UPLOAD_FILES_PATH
+              value: "/usr/local/tomcat/openmrs-uploads"
+          readinessProbe:
+            httpGet:
+              path: /openmrs
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /openmrs
+              port: 8080
+            initialDelaySeconds: 90
+            periodSeconds: 15
+          resources:
+            limits:
+              memory: "1024Mi"
+              cpu: "500m"
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+          volumeMounts:
+            - name: openmrs-uploads
+              mountPath: /usr/local/tomcat/openmrs-uploads
+      volumes:
+        - name: openmrs-uploads
+          emptyDir: {}
       imagePullSecrets:
         - name: ecr-secret
