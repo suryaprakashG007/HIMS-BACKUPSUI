@@ -14,6 +14,18 @@ spec:
       labels:
         app: openmrs
     spec:
+      initContainers:
+        - name: wait-for-db
+          image: busybox:1.35
+          command: ['sh', '-c']
+          args:
+            - |
+              echo "Waiting for database to be ready..."
+              until nc -z openmrs-db 3306; do
+                echo "Database not ready, waiting..."
+                sleep 5
+              done
+              echo "Database is ready!"
       containers:
         - name: openmrs
           image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/openmrs:latest
@@ -36,6 +48,16 @@ spec:
               value: "openmrs-db"
             - name: MYSQL_PORT
               value: "3306"
+            - name: DATABASE_HOST
+              value: "openmrs-db"
+            - name: DATABASE_PORT
+              value: "3306"
+            - name: WAIT_FOR_HOST
+              value: "openmrs-db"
+            - name: WAIT_FOR_PORT
+              value: "3306"
+            - name: WAIT_FOR
+              value: "openmrs-db:3306"
             - name: OPENMRS_DB_NAME
               value: "openmrs"
             - name: OPENMRS_DB_USERNAME
@@ -69,7 +91,6 @@ spec:
               value: "-Xms512m -Xmx1024m"
             - name: OPENMRS_UPLOAD_FILES_PATH
               value: "/usr/local/tomcat/openmrs-uploads"
-          # Increase initial delay to give more time for database connection
           readinessProbe:
             httpGet:
               path: /openmrs
