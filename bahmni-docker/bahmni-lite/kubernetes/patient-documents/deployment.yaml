@@ -21,6 +21,29 @@ spec:
             - containerPort: 80
           env:
             - name: openmrs_host
-              value: "openmrs" # or your OpenMRS service name (DNS)
+              value: "openmrs"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 80
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 5
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
       imagePullSecrets:
         - name: ecr-secret
