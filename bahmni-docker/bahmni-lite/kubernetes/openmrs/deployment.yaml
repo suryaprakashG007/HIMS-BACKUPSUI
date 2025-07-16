@@ -36,15 +36,17 @@ spec:
             - name: OMRS_DB_HOSTNAME
               value: "openmrs-db"
             - name: OMRS_DB_USERNAME
-              value: "openmrs"
+              value: "openmrs-user"
             - name: OMRS_DB_PASSWORD
-              value: "test"
+              value: "password"
             - name: OMRS_DB_PORT
               value: "3306"
             - name: OMRS_CREATE_TABLES
               value: "true"
             - name: OMRS_AUTO_UPDATE_DATABASE
               value: "true"
+            - name: OMRS_C3P0_MAX_SIZE
+              value: "100"
             - name: TZ
               value: "UTC"
           readinessProbe:
