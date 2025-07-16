@@ -1,3 +1,59 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: crater-atomfeed-db-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crater-atomfeed-db
+  labels:
+    app: crater-atomfeed-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crater-atomfeed-db
+  template:
+    metadata:
+      labels:
+        app: crater-atomfeed-db
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:5.7
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: crater-atomfeed-secrets
+                  key: db_root_password
+            - name: MYSQL_DATABASE
+              value: crater_atomfeed
+            - name: MYSQL_USER
+              value: crater_atomfeed_user
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: crater-atomfeed-secrets
+                  key: db_password
+          volumeMounts:
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-persistent-storage
+          persistentVolumeClaim:
+            claimName: crater-atomfeed-db-pvc
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -35,7 +91,6 @@ spec:
           ports:
             - containerPort: 80
           env:
-            # Database Configuration
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:mysql://crater-atomfeed-db:3306/crater_atomfeed?useSSL=false&allowPublicKeyRetrieval=true"
             - name: SPRING_DATASOURCE_USERNAME
@@ -46,7 +101,6 @@ spec:
                   name: crater-atomfeed-secrets
                   key: db_password
 
-            # OpenMRS Configuration
             - name: OPENMRS_URL
               value: "http://openmrs:8080/openmrs"
             - name: OPENMRS_ATOMFEED_USER
@@ -57,7 +111,6 @@ spec:
                   name: crater-atomfeed-secrets
                   key: openmrs_atomfeed_password
 
-            # Crater Integration
             - name: CRATER_URL
               value: "http://crater-nginx"
             - name: CRATER_USERNAME
@@ -68,7 +121,6 @@ spec:
                   name: crater-atomfeed-secrets
                   key: crater_password
 
-            # Mail Configuration
             - name: MAIL_SMTP_HOST
               value: "email-smtp.ap-south-1.amazonaws.com"
             - name: MAIL_SMTP_PORT
@@ -81,7 +133,6 @@ spec:
                   name: crater-atomfeed-secrets
                   key: mail_password
 
-            # Application Settings
             - name: SERVER_PORT
               value: "80"
             - name: TZ
