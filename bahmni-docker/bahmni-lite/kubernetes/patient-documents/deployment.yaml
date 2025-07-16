@@ -19,5 +19,8 @@ spec:
           image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/patient-documents:latest
           ports:
             - containerPort: 80
+          env:
+            - name: openmrs_host
+              value: "openmrs" # or your OpenMRS service name (DNS)
       imagePullSecrets:
         - name: ecr-secret
