@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: openmrs
-  labels:
-    app: openmrs
 spec:
   replicas: 1
   selector:
@@ -20,103 +18,27 @@ spec:
           command: ['sh', '-c']
           args:
             - |
-              echo "Waiting for database to be ready..."
+              echo "Waiting for DB on openmrs-db:3306...";
               until nc -z openmrs-db 3306; do
-                echo "Database not ready, waiting..."
-                sleep 5
-              done
-              echo "Database is ready!"
+                echo "Still waiting for DB...";
+                sleep 3;
+              done;
+              echo "DB is ready!";
       containers:
         - name: openmrs
-          image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/openmrs:latest
-          ports:
-            - containerPort: 8080
+          image: bahmni/openmrs:latest
+          command: ["sh", "-c"]
+          args: ["./start-bahmni.sh"]
           env:
-            - name: TZ
-              value: "UTC"
-            - name: OPENMRS_DB_HOST
-              value: "openmrs-db"
-            - name: OPENMRS_DB_PORT
-              value: "3306"
             - name: DB_HOST
               value: "openmrs-db"
             - name: DB_PORT
               value: "3306"
-            - name: DB_HOST_PORT
-              value: "openmrs-db:3306"
-            - name: MYSQL_HOST
-              value: "openmrs-db"
-            - name: MYSQL_PORT
-              value: "3306"
-            - name: DATABASE_HOST
-              value: "openmrs-db"
-            - name: DATABASE_PORT
-              value: "3306"
-            - name: WAIT_FOR_IT
-              value: "openmrs-db:3306"
-            - name: OPENMRS_DB_NAME
+            - name: DB_NAME
               value: "openmrs"
-            - name: OPENMRS_DB_USERNAME
-              value: "openmrs-user"
-            - name: OPENMRS_DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: user-password
-            - name: OPENMRS_DB_TYPE
-              value: "mysql"
-            - name: OPENMRS_DOCKER_ENV
-              value: "true"
-            - name: OMRS_C3P0_MAX_SIZE
-              value: "50"
-            - name: OMRS_DB_EXTRA_ARGS
-              value: "&zeroDateTimeBehavior=convertToNull"
-            - name: LUCENE_MATCH_TYPE
-              value: "START"
-            - name: DOCUMENT_MAX_SIZE_MB
-              value: "7"
-            - name: OPENMRS_DB_CREATE_TABLES
-              value: "false"
-            - name: OPENMRS_DB_AUTO_UPDATE
-              value: "true"
-            - name: OPENMRS_MODULE_WEB_ADMIN
-              value: "false"
-            - name: OMRS_JAVA_SERVER_OPTS
-              value: "-Xms512m -Xmx1024m"
-            - name: OMRS_JAVA_MEMORY_OPTS
-              value: "-Xms512m -Xmx1024m"
-            - name: OPENMRS_UPLOAD_FILES_PATH
-              value: "/usr/local/tomcat/openmrs-uploads"
-          readinessProbe:
-            httpGet:
-              path: /openmrs
-              port: 8080
-            initialDelaySeconds: 180
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 10
-          livenessProbe:
-            httpGet:
-              path: /openmrs
-              port: 8080
-            initialDelaySeconds: 300
-            periodSeconds: 15
-            timeoutSeconds: 5
-            failureThreshold: 5
-          resources:
-            limits:
-              memory: "1024Mi"
-              cpu: "500m"
-            requests:
-              memory: "512Mi"
-              cpu: "250m"
-          volumeMounts:
-            - name: openmrs-uploads
-              mountPath: /usr/local/tomcat/openmrs-uploads
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
-      volumes:
-        - name: openmrs-uploads
-          emptyDir: {}
-      imagePullSecrets:
-        - name: ecr-secret
+            - name: DB_USER
+              value: "openmrs"
+            - name: DB_PASSWORD
+              value: "test"
+          ports:
+            - containerPort: 8080
