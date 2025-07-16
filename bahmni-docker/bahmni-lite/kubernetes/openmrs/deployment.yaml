@@ -23,9 +23,11 @@ spec:
             - name: TZ
               value: "UTC"
             - name: OPENMRS_DB_HOST
-              value: "openmrs-db"  # Make sure this matches your DB service name
+              value: "openmrs-db"
             - name: OPENMRS_DB_PORT
               value: "3306"
+            - name: DB_HOST_PORT   # <== Added for wait-for-it.sh compatibility
+              value: "openmrs-db:3306"
             - name: OPENMRS_DB_NAME
               value: "openmrs"
             - name: OPENMRS_DB_USERNAME
