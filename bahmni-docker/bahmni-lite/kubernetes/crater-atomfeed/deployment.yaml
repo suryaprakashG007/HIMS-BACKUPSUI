@@ -2,12 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: crater-atomfeed
-  labels:
-    app: crater-atomfeed
 spec:
   replicas: 1
-  strategy:
-    type: Recreate
   selector:
     matchLabels:
       app: crater-atomfeed
@@ -17,27 +13,25 @@ spec:
         app: crater-atomfeed
     spec:
       restartPolicy: Always
- 
       initContainers:
         - name: wait-for-dependencies
           image: busybox:1.35
           command: ['sh', '-c']
           args:
             - |
-              echo "Waiting for crater-atomfeed-db:3306...";
+              echo "Waiting for crater-atomfeed-db on port 3306...";
               until nc -z crater-atomfeed-db 3306; do
                 echo "Still waiting for DB...";
                 sleep 3;
               done;
-              echo "DB is up!";
- 
-              echo "Waiting for OpenMRS at openmrs:8080...";
+              echo "DB is ready!";
+
+              echo "Waiting for OpenMRS on port 8080...";
               until nc -z openmrs 8080; do
                 echo "Still waiting for OpenMRS...";
                 sleep 3;
               done;
               echo "OpenMRS is up!";
- 
       containers:
         - name: crater-atomfeed
           image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/crater-atomfeed:1.0.0
@@ -53,7 +47,7 @@ spec:
                 secretKeyRef:
                   name: crater-atomfeed-secret
                   key: user-password
- 
+
             - name: OPENMRS_URL
               value: "http://openmrs:8080/openmrs"
             - name: OPENMRS_ATOMFEED_USER
@@ -63,7 +57,7 @@ spec:
                 secretKeyRef:
                   name: crater-atomfeed-secret
                   key: openmrs_atomfeed_password
- 
+
             - name: CRATER_URL
               value: "http://crater-nginx"
             - name: CRATER_USERNAME
@@ -73,7 +67,7 @@ spec:
                 secretKeyRef:
                   name: crater-atomfeed-secret
                   key: crater_password
- 
+
             - name: MAIL_SMTP_HOST
               value: "email-smtp.ap-south-1.amazonaws.com"
             - name: MAIL_SMTP_PORT
@@ -85,37 +79,35 @@ spec:
                 secretKeyRef:
                   name: crater-atomfeed-secret
                   key: mail_password
- 
+
             - name: SERVER_PORT
               value: "80"
             - name: TZ
               value: "UTC"
- 
-          livenessProbe:
+
+          startupProbe:
             httpGet:
               path: /actuator/health
               port: 80
             initialDelaySeconds: 120
-            periodSeconds: 20
-            timeoutSeconds: 10
-            failureThreshold: 3
- 
+            periodSeconds: 30
+            timeoutSeconds: 15
+            failureThreshold: 30
+
           readinessProbe:
             httpGet:
               path: /actuator/health
               port: 80
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 3
- 
-          resources:
-            requests:
-              memory: "512Mi"
-              cpu: "250m"
-            limits:
-              memory: "1Gi"
-              cpu: "500m"
- 
-      imagePullSecrets:
-        - name: ecr-secret
+            initialDelaySeconds: 150
+            periodSeconds: 15
+            timeoutSeconds: 10
+            failureThreshold: 10
+
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 80
+            initialDelaySeconds: 300
+            periodSeconds: 60
+            timeoutSeconds: 20
+            failureThreshold: 5
