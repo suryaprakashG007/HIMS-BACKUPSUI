@@ -39,6 +39,9 @@ spec:
       containers:
         - name: crater-atomfeed
           image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/crater-atomfeed:1.0.0
+          # Override the container's entrypoint to start Java directly
+          command: ["java"]
+          args: ["-jar", "/app/crater-atomfeed.jar"]
           ports:
             - containerPort: 80
           env:
