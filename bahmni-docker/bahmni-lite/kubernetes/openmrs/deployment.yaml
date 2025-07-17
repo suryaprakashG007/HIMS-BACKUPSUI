@@ -52,27 +52,27 @@ spec:
  
           startupProbe:
             httpGet:
-              path: /openmrs
+              path: /
               port: 8080
-            initialDelaySeconds: 20
-            periodSeconds: 30
+            initialDelaySeconds: 60
+            periodSeconds: 15
             timeoutSeconds: 10
-            failureThreshold: 30
+            failureThreshold: 40
  
           readinessProbe:
             httpGet:
-              path: /openmrs
+              path: /
               port: 8080
-            initialDelaySeconds: 90
+            initialDelaySeconds: 120
             periodSeconds: 15
             timeoutSeconds: 10
             failureThreshold: 10
  
           livenessProbe:
             httpGet:
-              path: /openmrs
+              path: /
               port: 8080
-            initialDelaySeconds: 120
+            initialDelaySeconds: 180
             periodSeconds: 30
             timeoutSeconds: 10
             failureThreshold: 5
