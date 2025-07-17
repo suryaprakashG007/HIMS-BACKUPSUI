@@ -53,11 +53,15 @@ spec:
             httpGet:
               path: /openmrs
               port: 8080
-            initialDelaySeconds: 30
+            initialDelaySeconds: 60
             periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 10
           livenessProbe:
             httpGet:
               path: /openmrs
               port: 8080
-            initialDelaySeconds: 60
+            initialDelaySeconds: 120
             periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 5
