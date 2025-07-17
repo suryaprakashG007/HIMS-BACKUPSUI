@@ -6,8 +6,6 @@ metadata:
     app: crater-atomfeed
 spec:
   replicas: 1
-  strategy:
-    type: Recreate
   selector:
     matchLabels:
       app: crater-atomfeed
@@ -16,120 +14,26 @@ spec:
       labels:
         app: crater-atomfeed
     spec:
-      restartPolicy: Always
-      imagePullSecrets:
-        - name: ecr-secret
-      initContainers:
-        - name: wait-for-dependencies
-          image: curlimages/curl:latest
-          command: ['sh', '-c']
-          args:
-            - |
-              echo "Waiting for crater-atomfeed-db:3306...";
-              until nc -z crater-atomfeed-db 3306; do
-                echo "Still waiting for DB...";
-                sleep 3;
-              done;
-              echo "DB is up!";
-              
-              echo "Waiting for OpenMRS at openmrs:8080...";
-              until nc -z openmrs 8080; do
-                echo "Still waiting for OpenMRS...";
-                sleep 3;
-              done;
-              echo "OpenMRS is up!";
-              
-              echo "Waiting for Crater service...";
-              until curl -f http://crater-nginx/ || curl -f http://crater-nginx; do
-                echo "Still waiting for Crater to be ready...";
-                sleep 5;
-              done;
-              echo "Crater is ready!";
-              
-              echo "Testing Crater login endpoint...";
-              for i in {1..5}; do
-                if curl -f http://crater-nginx/api/v1/auth/login -X POST -H "Content-Type: application/json" -d '{"test":"test"}' 2>/dev/null; then
-                  echo "Crater login endpoint is responding";
-                  break;
-                elif curl -f http://crater-nginx/login 2>/dev/null; then
-                  echo "Crater login page is available";
-                  break;
-                else
-                  echo "Attempt $i: Crater login endpoint not ready, waiting...";
-                  sleep 10;
-                fi
-              done;
-              echo "Crater health check completed";
       containers:
         - name: crater-atomfeed
           image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/crater-atomfeed:1.0.0
-          command: ["java"]
-          args: ["-jar", "/crater-atomfeed.jar"]
           ports:
             - containerPort: 8080
           env:
-            - name: SPRING_DATASOURCE_URL
-              value: "jdbc:mysql://crater-atomfeed-db:3306/crater_atomfeed?useSSL=false&allowPublicKeyRetrieval=true"
-            - name: SPRING_DATASOURCE_USERNAME
-              value: "crater_atomfeed_user"
-            - name: SPRING_DATASOURCE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: crater-atomfeed-secret
-                  key: user-password
-            - name: OPENMRS_URL
-              value: "http://openmrs:8080/openmrs"
-            - name: OPENMRS_ATOMFEED_USER
-              value: "admin"
-            - name: OPENMRS_ATOMFEED_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: crater-atomfeed-secret
-                  key: openmrs_atomfeed_password
-            - name: CRATER_URL
-              value: "http://crater-nginx"
             - name: CRATER_USERNAME
               value: "superman@bahmni.org"
             - name: CRATER_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: crater-atomfeed-secret
-                  key: crater_password
-            - name: MAIL_SMTP_HOST
-              value: "email-smtp.ap-south-1.amazonaws.com"
-            - name: MAIL_SMTP_PORT
-              value: "587"
-            - name: MAIL_USER
-              value: "AKIA3LET5U6POO5XGQ5S"
-            - name: MAIL_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: crater-atomfeed-secret
-                  key: mail_password
-            - name: SERVER_PORT
-              value: "8080"
-            - name: TZ
-              value: "UTC"
-          livenessProbe:
-            httpGet:
-              path: /actuator/health
-              port: 8080
-            initialDelaySeconds: 180
-            periodSeconds: 30
-            timeoutSeconds: 15
-            failureThreshold: 5
-          readinessProbe:
-            httpGet:
-              path: /actuator/health
-              port: 8080
-            initialDelaySeconds: 60
-            periodSeconds: 15
-            timeoutSeconds: 10
-            failureThreshold: 5
-          resources:
-            requests:
-              memory: "512Mi"
-              cpu: "250m"
-            limits:
-              memory: "1Gi"
-              cpu: "500m"
+              value: "Crater123"
+            - name: CRATER_ATOMFEED_DB_USERNAME
+              value: "crater_atomfeed_user"
+            - name: CRATER_ATOMFEED_DB_PASSWORD
+              value: "passw0rd"
+            - name: CRATER_ATOMFEED_DB_HOST
+              value: "crater-atomfeed-db"
+            - name: CRATER_ATOMFEED_DB_PORT
+              value: "3306"
+            - name: CRATER_ATOMFEED_DB_NAME
+              value: "crater_atomfeed"
+            - name: CRATER_URL
+              value: "http://crater-nginx"
+      restartPolicy: Always

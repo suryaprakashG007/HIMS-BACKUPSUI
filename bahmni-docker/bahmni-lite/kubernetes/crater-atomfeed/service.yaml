@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: crater-atomfeed
+  name: crater-atomfeed           # ✅ Service name
   labels:
-    app: crater-atomfeed
+    app: crater-atomfeed          # ✅ Labels for identification
 spec:
-  type: ClusterIP
+  type: ClusterIP                 # ✅ Default service type; internal access
   selector:
-    app: crater-atomfeed
+    app: crater-atomfeed          # ✅ Selects pods with this label
   ports:
     - name: http
       protocol: TCP
-      port: 80
-      targetPort: 8080  # Fixed: Changed from 80 to 8080
+      port: 80                    # ✅ Port exposed inside the cluster
+      targetPort: 8080            # ✅ Port your app listens to inside the pod
