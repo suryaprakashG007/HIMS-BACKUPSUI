@@ -6,6 +6,8 @@ metadata:
     app: crater-atomfeed
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: crater-atomfeed
@@ -15,28 +17,32 @@ spec:
         app: crater-atomfeed
     spec:
       restartPolicy: Always
+
       initContainers:
         - name: wait-for-dependencies
           image: busybox:1.35
           command: ['sh', '-c']
           args:
             - |
-              echo "Waiting for crater-atomfeed-db on port 3306...";
+              echo "Waiting for crater-atomfeed-db:3306...";
               until nc -z crater-atomfeed-db 3306; do
                 echo "Still waiting for DB...";
                 sleep 3;
               done;
-              echo "DB is ready!";
+              echo "DB is up!";
 
-              echo "Waiting for OpenMRS on port 8080...";
+              echo "Waiting for OpenMRS at openmrs:8080...";
               until nc -z openmrs 8080; do
                 echo "Still waiting for OpenMRS...";
                 sleep 3;
               done;
               echo "OpenMRS is up!";
+
       containers:
         - name: crater-atomfeed
           image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/crater-atomfeed:1.0.0
+          command: ["java"]
+          args: ["-jar", "/crater-atomfeed.jar"]
           ports:
             - containerPort: 80
           env:
@@ -87,32 +93,31 @@ spec:
             - name: TZ
               value: "UTC"
 
-          startupProbe:
+          livenessProbe:
             httpGet:
               path: /actuator/health
               port: 80
             initialDelaySeconds: 120
-            periodSeconds: 30
-            timeoutSeconds: 15
-            failureThreshold: 30
+            periodSeconds: 20
+            timeoutSeconds: 10
+            failureThreshold: 3
 
           readinessProbe:
             httpGet:
               path: /actuator/health
               port: 80
-            initialDelaySeconds: 150
-            periodSeconds: 15
-            timeoutSeconds: 10
-            failureThreshold: 10
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
 
-          livenessProbe:
-            httpGet:
-              path: /actuator/health
-              port: 80
-            initialDelaySeconds: 300
-            periodSeconds: 60
-            timeoutSeconds: 20
-            failureThreshold: 5
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
 
       imagePullSecrets:
         - name: ecr-secret
