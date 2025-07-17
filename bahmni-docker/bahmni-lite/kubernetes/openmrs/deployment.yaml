@@ -49,15 +49,30 @@ spec:
               value: "100"
             - name: TZ
               value: "UTC"
+ 
+          startupProbe:
+            httpGet:
+              path: /openmrs
+              port: 8080
+            failureThreshold: 30         # Allow up to 15 minutes (30 * 30s)
+            periodSeconds: 30
+            initialDelaySeconds: 20
+            timeoutSeconds: 10
+ 
           readinessProbe:
             httpGet:
               path: /openmrs
               port: 8080
-            initialDelaySeconds: 30
+            initialDelaySeconds: 5
             periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 6
+ 
           livenessProbe:
             httpGet:
               path: /openmrs
               port: 8080
-            initialDelaySeconds: 60
+            initialDelaySeconds: 10
             periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 5
