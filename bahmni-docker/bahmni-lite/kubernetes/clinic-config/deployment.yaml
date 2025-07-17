@@ -16,8 +16,22 @@ spec:
     spec:
       containers:
         - name: clinic-config
-          image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/clinic-config:latest
+          image: nginx:alpine
           ports:
             - containerPort: 80
+          volumeMounts:
+            - name: bahmni-config
+              mountPath: /usr/share/nginx/html
+      volumes:
+        - name: bahmni-config
+          emptyDir: {}
+      initContainers:
+        - name: copy-config
+          image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/clinic-config:latest
+          command: ["/bin/sh", "-c", "cp -r /usr/local/bahmni_config/* /config"]
+          volumeMounts:
+            - name: bahmni-config
+              mountPath: /config
       imagePullSecrets:
         - name: ecr-secret
+ 
