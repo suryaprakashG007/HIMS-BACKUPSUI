@@ -27,7 +27,7 @@ spec:
               echo "DB is ready!";
       containers:
         - name: openmrs
-          image: bahmni/openmrs:latest
+          image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/openmrs:latest
           ports:
             - containerPort: 8080
           env:
