@@ -20,7 +20,7 @@ spec:
           ports:
             - containerPort: 80
           env:
-            - name: openmrs_host
+            - name: OPENMRS_HOST
               value: "openmrs"
           readinessProbe:
             httpGet:
