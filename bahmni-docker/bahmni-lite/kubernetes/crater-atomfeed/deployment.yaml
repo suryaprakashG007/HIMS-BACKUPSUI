@@ -21,32 +21,45 @@ spec:
         - name: ecr-secret
       initContainers:
         - name: wait-for-dependencies
-          image: busybox:1.35
+          image: curlimages/curl:latest
           command: ['sh', '-c']
           args:
             - |
               echo "Waiting for crater-atomfeed-db:3306...";
               until nc -z crater-atomfeed-db 3306; do
                 echo "Still waiting for DB...";
-                sleep 2;
+                sleep 3;
               done;
               echo "DB is up!";
               
               echo "Waiting for OpenMRS at openmrs:8080...";
               until nc -z openmrs 8080; do
                 echo "Still waiting for OpenMRS...";
-                sleep 2;
+                sleep 3;
               done;
               echo "OpenMRS is up!";
               
-              echo "Quick check for Crater service...";
-              if nc -z crater-nginx 80; then
-                echo "Crater port is accessible";
-              else
-                echo "Crater port check failed, but continuing...";
-              fi;
+              echo "Waiting for Crater service...";
+              until curl -f http://crater-nginx/ || curl -f http://crater-nginx; do
+                echo "Still waiting for Crater to be ready...";
+                sleep 5;
+              done;
+              echo "Crater is ready!";
               
-              echo "Dependencies check completed - starting main container";
+              echo "Testing Crater login endpoint...";
+              for i in {1..5}; do
+                if curl -f http://crater-nginx/api/v1/auth/login -X POST -H "Content-Type: application/json" -d '{"test":"test"}' 2>/dev/null; then
+                  echo "Crater login endpoint is responding";
+                  break;
+                elif curl -f http://crater-nginx/login 2>/dev/null; then
+                  echo "Crater login page is available";
+                  break;
+                else
+                  echo "Attempt $i: Crater login endpoint not ready, waiting...";
+                  sleep 10;
+                fi
+              done;
+              echo "Crater health check completed";
       containers:
         - name: crater-atomfeed
           image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/crater-atomfeed:1.0.0
