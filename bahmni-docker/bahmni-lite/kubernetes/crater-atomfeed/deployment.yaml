@@ -16,13 +16,32 @@ spec:
       labels:
         app: crater-atomfeed
     spec:
+      restartPolicy: Always
+      initContainers:
+        - name: wait-for-dependencies
+          image: busybox:1.35
+          command: ['sh', '-c']
+          args:
+            - |
+              echo "Waiting for crater-atomfeed-db:3306...";
+              until nc -z crater-atomfeed-db 3306; do
+                echo "Still waiting for DB...";
+                sleep 3;
+              done;
+              echo "DB is up!";
+ 
+              echo "Waiting for OpenMRS at openmrs:8080...";
+              until nc -z openmrs 8080; do
+                echo "Still waiting for OpenMRS...";
+                sleep 3;
+              done;
+              echo "OpenMRS is up!";
       containers:
         - name: crater-atomfeed
           image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/crater-atomfeed:1.0.0
           ports:
             - containerPort: 80
           env:
-            # Database Configuration
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:mysql://crater-atomfeed-db:3306/crater_atomfeed?useSSL=false&allowPublicKeyRetrieval=true"
             - name: SPRING_DATASOURCE_USERNAME
@@ -33,7 +52,6 @@ spec:
                   name: crater-atomfeed-secrets
                   key: db_password
  
-            # OpenMRS Configuration
             - name: OPENMRS_URL
               value: "http://openmrs:8080/openmrs"
             - name: OPENMRS_ATOMFEED_USER
@@ -44,7 +62,6 @@ spec:
                   name: crater-atomfeed-secrets
                   key: openmrs_atomfeed_password
  
-            # Crater Integration
             - name: CRATER_URL
               value: "http://crater-nginx"
             - name: CRATER_USERNAME
@@ -55,7 +72,6 @@ spec:
                   name: crater-atomfeed-secrets
                   key: crater_password
  
-            # Mail Configuration
             - name: MAIL_SMTP_HOST
               value: "email-smtp.ap-south-1.amazonaws.com"
             - name: MAIL_SMTP_PORT
@@ -68,7 +84,6 @@ spec:
                   name: crater-atomfeed-secrets
                   key: mail_password
  
-            # Application Settings
             - name: SERVER_PORT
               value: "80"
             - name: TZ
