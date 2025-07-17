@@ -17,6 +17,8 @@ spec:
         app: crater-atomfeed
     spec:
       restartPolicy: Always
+      imagePullSecrets:
+        - name: ecr-secret
 
       initContainers:
         - name: wait-for-dependencies
@@ -44,7 +46,7 @@ spec:
           command: ["java"]
           args: ["-jar", "/crater-atomfeed.jar"]
           ports:
-            - containerPort: 80
+            - containerPort: 8080
           env:
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:mysql://crater-atomfeed-db:3306/crater_atomfeed?useSSL=false&allowPublicKeyRetrieval=true"
@@ -89,14 +91,14 @@ spec:
                   key: mail_password
 
             - name: SERVER_PORT
-              value: "80"
+              value: "8080"  # <- match container port!
             - name: TZ
               value: "UTC"
 
           livenessProbe:
             httpGet:
               path: /actuator/health
-              port: 80
+              port: 8080
             initialDelaySeconds: 120
             periodSeconds: 20
             timeoutSeconds: 10
@@ -105,7 +107,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /actuator/health
-              port: 80
+              port: 8080
             initialDelaySeconds: 30
             periodSeconds: 10
             timeoutSeconds: 5
