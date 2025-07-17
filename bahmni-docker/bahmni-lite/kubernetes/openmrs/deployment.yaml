@@ -54,25 +54,25 @@ spec:
             httpGet:
               path: /openmrs
               port: 8080
-            failureThreshold: 30         # Allow up to 15 minutes (30 * 30s)
-            periodSeconds: 30
             initialDelaySeconds: 20
+            periodSeconds: 30
             timeoutSeconds: 10
+            failureThreshold: 30
  
           readinessProbe:
             httpGet:
               path: /openmrs
               port: 8080
-            initialDelaySeconds: 5
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 6
+            initialDelaySeconds: 90
+            periodSeconds: 15
+            timeoutSeconds: 10
+            failureThreshold: 10
  
           livenessProbe:
             httpGet:
               path: /openmrs
               port: 8080
-            initialDelaySeconds: 10
+            initialDelaySeconds: 120
             periodSeconds: 30
-            timeoutSeconds: 5
+            timeoutSeconds: 10
             failureThreshold: 5
