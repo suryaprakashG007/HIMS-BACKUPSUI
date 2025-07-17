@@ -19,10 +19,13 @@ spec:
       restartPolicy: Always
       initContainers:
         - name: wait-for-dependencies
-          image: busybox:1.35
+          image: alpine:3.18
           command: ['sh', '-c']
           args:
             - |
+              echo "Installing netcat...";
+              apk add --no-cache netcat-openbsd >/dev/null
+              
               echo "Waiting for crater-atomfeed-db:3306...";
               until nc -z crater-atomfeed-db 3306; do
                 echo "Still waiting for DB...";
