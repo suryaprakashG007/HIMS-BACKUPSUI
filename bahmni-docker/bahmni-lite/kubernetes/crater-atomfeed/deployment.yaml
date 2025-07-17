@@ -17,15 +17,13 @@ spec:
         app: crater-atomfeed
     spec:
       restartPolicy: Always
+ 
       initContainers:
         - name: wait-for-dependencies
-          image: alpine:3.18
+          image: busybox:1.35
           command: ['sh', '-c']
           args:
             - |
-              echo "Installing netcat...";
-              apk add --no-cache netcat-openbsd >/dev/null
-              
               echo "Waiting for crater-atomfeed-db:3306...";
               until nc -z crater-atomfeed-db 3306; do
                 echo "Still waiting for DB...";
@@ -39,6 +37,7 @@ spec:
                 sleep 3;
               done;
               echo "OpenMRS is up!";
+ 
       containers:
         - name: crater-atomfeed
           image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/crater-atomfeed:1.0.0
