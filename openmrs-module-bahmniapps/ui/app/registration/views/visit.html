@@ -18,7 +18,7 @@
 }
 .registraion_legend:before {
     content: '';
-    border-top: none;
+    border-top: none !important;
     position: absolute;
     top: 14px;
     width: 96%;
@@ -66,7 +66,7 @@ button.cancel {
                 <div class="box-container" style="margin-top: 20px;border-radius: 16px;">
 
                     <div class="registraion_legend first-registraion_legend" style="border: none !important;" >
-                        <span class="mylegend" style="background: rgba(33, 26, 232, 0.15) !important;color: rgba(33, 26, 232, 1);"><strong>{{ ::'REGISTRATION_LABEL_SUMMARY' | translate}}</strong></span>
+                        <span class="mylegend"><strong>{{ ::'REGISTRATION_LABEL_SUMMARY' | translate}}</strong></span>
                     </div>
                     <section class="patient-identifier-name">
                         <div class="form-field">

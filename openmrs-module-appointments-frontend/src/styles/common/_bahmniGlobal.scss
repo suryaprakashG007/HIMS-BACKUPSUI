@@ -297,7 +297,7 @@ u, .add-drug-btninput[value]:first-letter {
   }
   &:before{
     content: "";
-    border-top:1px $lightGray solid;
+    border-top:none !important;
     position: absolute;
     top: 14px;
     width: 96%;
