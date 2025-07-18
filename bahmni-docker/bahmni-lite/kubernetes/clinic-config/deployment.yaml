@@ -19,5 +19,13 @@ spec:
           image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/clinic-config:latest
           ports:
             - containerPort: 80
+          volumeMounts:
+            - name: clinic-config-volume
+              mountPath: /usr/share/nginx/html/bahmni_config
       imagePullSecrets:
         - name: ecr-secret
+      volumes:
+        - name: clinic-config-volume
+          hostPath:
+            path: /home/ubuntu/HIMS-BACKUPS3/clinic-config
+            type: Directory
