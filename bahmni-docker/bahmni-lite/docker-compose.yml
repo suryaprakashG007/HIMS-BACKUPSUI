@@ -30,7 +30,7 @@ services:
       TZ: ${TZ}
 
   bahmni-config:
-    image: '913524912266.dkr.ecr.ap-south-1.amazonaws.com/democonfig:latest'
+    image: 'democonfig'
     volumes:
       - '${CONFIG_VOLUME:?}:/usr/local/bahmni_config'
     logging: *log-config
