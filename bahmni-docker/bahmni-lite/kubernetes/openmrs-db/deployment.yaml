@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: openmrs-db
-          image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/openmrs-db:1.0.0
+          image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/openmrs-db:1.0.0-lite-mysql5.6
           ports:
             - containerPort: 3306
           env:
