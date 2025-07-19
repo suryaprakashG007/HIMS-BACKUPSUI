@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: patient-documents
-          image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/patient-documents:latest
+          image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/patient-documents:1.0.0
           ports:
             - containerPort: 80
           env:

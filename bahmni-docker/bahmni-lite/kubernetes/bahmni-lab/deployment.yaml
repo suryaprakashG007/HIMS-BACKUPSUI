@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bahmni-lab
-          image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/bahmni-lab:latest
+          image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/bahmni-lab:1.0.0
           ports:
             - containerPort: 80
       imagePullSecrets:

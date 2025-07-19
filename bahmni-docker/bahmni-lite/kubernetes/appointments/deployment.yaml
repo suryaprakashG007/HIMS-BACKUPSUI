@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: appointments
-          image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/appointments:latest
+          image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/appointments:1.0.0
           ports:
             - containerPort: 80
       imagePullSecrets:
