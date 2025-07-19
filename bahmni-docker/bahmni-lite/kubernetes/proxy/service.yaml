@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: proxy
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: proxy
   ports:
