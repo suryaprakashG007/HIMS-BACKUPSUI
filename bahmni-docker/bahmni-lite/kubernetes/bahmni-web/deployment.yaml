@@ -21,7 +21,7 @@ spec:
             - containerPort: 80
           volumeMounts:
             - name: config-volume
-              mountPath: /usr/local/bahmni_config/openmrs/apps/home
+              mountPath: /usr/share/nginx/html/bahmni_config/openmrs/apps/home
       volumes:
         - name: config-volume
           configMap:
