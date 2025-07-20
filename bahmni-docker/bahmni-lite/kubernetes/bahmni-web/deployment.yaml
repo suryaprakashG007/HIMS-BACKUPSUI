@@ -21,22 +21,10 @@ spec:
             - containerPort: 80
           volumeMounts:
             - name: config-volume
-              mountPath: /usr/share/nginx/html/bahmni_config/openmrs/apps/home
-              readOnly: true
+              mountPath: /usr/local/bahmni_config/openmrs/apps/home
       volumes:
         - name: config-volume
           configMap:
             name: bahmni-web-config
-            items:
-              - key: app.json
-                path: app.json
-              - key: extension.json
-                path: extension.json
-              - key: whiteLabel.json
-                path: whiteLabel.json
-              - key: offline-config.json
-                path: offline-config.json
-              - key: locale_languages.json
-                path: locale_languages.json
       imagePullSecrets:
         - name: ecr-secret
