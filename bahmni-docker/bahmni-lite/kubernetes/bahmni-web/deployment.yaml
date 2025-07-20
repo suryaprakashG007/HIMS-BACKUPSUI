@@ -19,5 +19,13 @@ spec:
           image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/bahmni-web:1.0.0
           ports:
             - containerPort: 80
+          volumeMounts:
+            - name: config-volume
+              mountPath: /usr/local/apache2/htdocs/bahmni_config
+      volumes:
+        - name: config-volume
+          hostPath:
+            path: /home/ubuntu/HIMS-BACKUPS5/clinic-config/bahmni_config
+            type: Directory
       imagePullSecrets:
         - name: ecr-secret
