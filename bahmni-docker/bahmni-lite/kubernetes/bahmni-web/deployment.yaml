@@ -21,11 +21,10 @@ spec:
             - containerPort: 80
           volumeMounts:
             - name: config-volume
-              mountPath: /usr/local/bahmni_config
+              mountPath: /usr/local/bahmni_config/openmrs/apps/home
       volumes:
         - name: config-volume
-          hostPath:
-            path: /home/ubuntu/HIMS-BACKUPS5/clinic-config/bahmni_config
-            type: Directory
+          configMap:
+            name: bahmni-web-config
       imagePullSecrets:
         - name: ecr-secret
