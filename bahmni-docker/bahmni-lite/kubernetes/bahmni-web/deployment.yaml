@@ -1,4 +1,3 @@
-# Step 4: Updated bahmni-web Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -21,12 +20,11 @@ spec:
           ports:
             - containerPort: 80
           volumeMounts:
-            # Mount the shared volume to nginx html directory
-            - name: shared-config-volume
-              mountPath: /usr/share/nginx/html/bahmni_config
+            - name: config-volume
+              mountPath: /usr/share/nginx/html/bahmni_config/openmrs/apps/home
       volumes:
-        - name: shared-config-volume
-          persistentVolumeClaim:
-            claimName: bahmni-config-pvc
+        - name: config-volume
+          configMap:
+            name: bahmni-web-config
       imagePullSecrets:
         - name: ecr-secret
