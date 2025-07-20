@@ -19,13 +19,5 @@ spec:
           image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/clinic-config:1.0.0
           ports:
             - containerPort: 80
-          volumeMounts:
-            - name: config-volume
-              mountPath: /bahmni_config  # Path where app expects configs
-              subPath: bahmni_config     # Subpath from ConfigMap
-      volumes:
-        - name: config-volume
-          configMap:
-            name: clinic-config
       imagePullSecrets:
         - name: ecr-secret
