@@ -22,17 +22,9 @@ spec:
           volumeMounts:
             - name: config-volume
               mountPath: /usr/share/nginx/html/bahmni_config/openmrs/apps/home
-              readOnly: true
-            - name: nginx-conf
-              mountPath: /etc/nginx/nginx.conf
-              subPath: nginx.conf
-              readOnly: true
       volumes:
         - name: config-volume
           configMap:
             name: bahmni-web-config
-        - name: nginx-conf
-          configMap:
-            name: bahmni-nginx-conf
       imagePullSecrets:
         - name: ecr-secret
