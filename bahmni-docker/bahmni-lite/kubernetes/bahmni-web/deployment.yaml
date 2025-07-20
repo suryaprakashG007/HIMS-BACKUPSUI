@@ -21,7 +21,7 @@ spec:
             - containerPort: 80
           volumeMounts:
             - name: config-volume
-              mountPath: /usr/local/apache2/htdocs/bahmni_config
+              mountPath: /usr/local/bahmni_config
       volumes:
         - name: config-volume
           hostPath:
