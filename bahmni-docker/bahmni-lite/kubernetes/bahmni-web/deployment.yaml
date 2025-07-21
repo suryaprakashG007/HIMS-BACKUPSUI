@@ -20,11 +20,11 @@ spec:
           ports:
             - containerPort: 80
           volumeMounts:
-            - name: config-volume
+            - name: bahmni-config
               mountPath: /usr/share/nginx/html/bahmni_config/openmrs/apps/home
       volumes:
-        - name: config-volume
-          configMap:
-            name: bahmni-web-config
+        - name: bahmni-config
+          persistentVolumeClaim:
+            claimName: bahmni-web-pvc
       imagePullSecrets:
         - name: ecr-secret
