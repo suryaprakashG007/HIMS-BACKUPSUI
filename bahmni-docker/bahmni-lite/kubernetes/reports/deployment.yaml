@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
         - name: reports
-          image: <your-ecr-repo-uri>:1.0.0
+          image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/reports:1.0.0
           env:
             - name: TZ
               value: Asia/Kolkata
