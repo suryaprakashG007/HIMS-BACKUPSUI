@@ -30,18 +30,9 @@ services:
       TZ: ${TZ}
 
   bahmni-config:
-    image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/clinic-config:1.0.0
+    image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/democonfig:latest
     volumes:
       - '${CONFIG_VOLUME:?}:/usr/local/bahmni_config'
-      - '../../clinic-config/openmrs/apps/admin/extension.json:/usr/local/bahmni_config/openmrs/apps/admin/extension.json'
-      - '../../clinic-config/openmrs/apps/clinical/dashboard.json:/usr/local/bahmni_config/openmrs/apps/clinical/dashboard.json'
-      - '../../clinic-config/openmrs/apps/home/extension.json:/usr/local/bahmni_config/openmrs/apps/home/extension.json'
-      - '../../clinic-config/openmrs/apps/home/whiteLabel.json:/usr/local/bahmni_config/openmrs/apps/home/whiteLabel.json'
-      - '../../clinic-config/openmrs/apps/registration/extension.json:/usr/local/bahmni_config/openmrs/apps/registration/extension.json'
-      - '../../openmrs-module-bahmniapps/ui/app/styles:/usr/local/bahmni_config/openmrs/styles'
-      - '../../openmrs-module-bahmniapps/ui/app/styles/appointments:/usr/local/bahmni_config/openmrs/styles/appointments'
-      - '../../clinic-config/openmrs/apps/registration/registrationCardLayout/print.html:/usr/local/bahmni_config/openmrs/apps/registration/registrationCardLayout/print.html'
-
     logging: *log-config
     restart: ${RESTART_POLICY}
 
