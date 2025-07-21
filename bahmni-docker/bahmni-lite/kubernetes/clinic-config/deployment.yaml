@@ -63,22 +63,19 @@ spec:
     spec:
       containers:
         - name: clinic-config
-          image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/democonfig:latest
+          image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/clinic-config:1.0.0
           volumeMounts:
             - name: shared-config-volume
               mountPath: /shared/bahmni_config
           command: ["sh", "-c"]
           args:
             - |
-              echo "Checking if config exists..."
-              if [ -z "$(ls -A /shared/bahmni_config)" ]; then
-                echo "No config found, copying default config..."
-                mkdir -p /shared/bahmni_config/openmrs/apps/home
-                cp -r /etc/bahmni_config/* /shared/bahmni_config/
-                echo "Config copied successfully!"
-              else
-                echo "Config already exists. Skipping copy."
-              fi
+              echo "🧹 Cleaning existing config..."
+              rm -rf /shared/bahmni_config/*
+              echo "📦 Copying new config from /etc/bahmni_config..."
+              mkdir -p /shared/bahmni_config/openmrs/apps/home
+              cp -r /etc/bahmni_config/* /shared/bahmni_config/
+              echo "✅ Config copied."
               ls -la /shared/bahmni_config/
               tail -f /dev/null
       volumes:
@@ -87,3 +84,4 @@ spec:
             claimName: bahmni-config-pvc
       imagePullSecrets:
         - name: ecr-secret
+
