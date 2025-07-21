@@ -19,5 +19,26 @@ spec:
           image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/clinic-config:1.0.0
           ports:
             - containerPort: 80
+          volumeMounts:
+            - name: shared-config-volume
+              mountPath: /shared/bahmni_config
+          # Copy config files to shared volume on startup and keep container running
+          command: ["sh", "-c"]
+          args: 
+            - |
+              echo "Copying configuration files to shared volume..."
+              # Create directory structure if it doesn't exist
+              mkdir -p /shared/bahmni_config/openmrs/apps/home
+              # Copy all config files
+              cp -r /etc/bahmni_config/* /shared/bahmni_config/ 2>/dev/null || true
+              echo "Configuration files copied successfully!"
+              echo "Files in shared volume:"
+              ls -la /shared/bahmni_config/
+              echo "Keeping container alive..."
+              tail -f /dev/null
+      volumes:
+        - name: shared-config-volume
+          persistentVolumeClaim:
+            claimName: bahmni-config-pvc
       imagePullSecrets:
         - name: ecr-secret
