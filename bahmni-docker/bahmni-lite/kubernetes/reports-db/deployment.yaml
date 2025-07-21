@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: reportsdb
+  name: reports-db
   labels:
-    app: reportsdb
+    app: reports-db
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: reportsdb
+      app: reports-db
   template:
     metadata:
       labels:
-        app: reportsdb
+        app: reports-db
     spec:
       containers:
-        - name: reportsdb
+        - name: reports-db
           image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/reports-db:8.0  # ECR image
           ports:
             - containerPort: 3306
