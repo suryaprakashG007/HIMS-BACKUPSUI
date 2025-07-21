@@ -273,7 +273,7 @@ services:
     restart: ${RESTART_POLICY}
 
   reports:
-    image: bahmni/reports:${REPORTS_IMAGE_TAG:?}
+    image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/reports:1.0.0
     profiles: ["reports","bahmni-lite","bahmni-mart"]
     environment:
       TZ: ${TZ}
@@ -301,7 +301,7 @@ services:
 
   reportsdb:
     platform: linux/amd64
-    image: ${REPORTS_DB_IMAGE_NAME:?}
+    image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/reports-db:8.0
     profiles: ["reports","bahmni-lite","bahmni-mart"]
     environment:
       TZ: ${TZ}
