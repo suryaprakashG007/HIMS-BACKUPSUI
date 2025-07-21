@@ -1,15 +1,29 @@
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: crater-nginx
+# spec:
+#   type: ClusterIP
+#   selector:
+#     app: crater-nginx
+#   ports:
+#     - name: http         
+#       port: 80
+#       targetPort: 80
+#     - name: https        
+#       port: 443
+#       targetPort: 443
+
 apiVersion: v1
 kind: Service
 metadata:
   name: crater-nginx
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: crater-nginx
   ports:
-    - name: http         
+    - name: http
       port: 80
       targetPort: 80
-    - name: https        
-      port: 443
-      targetPort: 443
+      nodePort: 30444  # Must be between 30000–32767
