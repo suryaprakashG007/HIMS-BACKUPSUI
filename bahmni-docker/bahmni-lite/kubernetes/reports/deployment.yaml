@@ -25,16 +25,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: reports
+  name: bahmni-lite-reports
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: reports
+      app: bahmni-lite-reports
   template:
     metadata:
       labels:
-        app: reports
+        app: bahmni-lite-reports
     spec:
       containers:
         - name: reports

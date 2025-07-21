@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: reports-db
+  name: reportsdb
   labels:
-    app: reports-db
+    app: reportsdb
 spec:
   selector:
-    app: reports-db
+    app: reportsdb
   ports:
     - protocol: TCP
       port: 3306
