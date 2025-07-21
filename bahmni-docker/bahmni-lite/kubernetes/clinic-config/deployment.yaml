@@ -22,23 +22,25 @@ spec:
           volumeMounts:
             - name: shared-config-volume
               mountPath: /shared/bahmni_config
-          # Copy config files to shared volume on startup and keep container running
           command: ["sh", "-c"]
-          args: 
+          args:
             - |
-              echo "Copying configuration files to shared volume..."
-              # Create directory structure if it doesn't exist
-              mkdir -p /shared/bahmni_config/openmrs/apps/home
-              # Copy all config files
-              cp -r /etc/bahmni_config/* /shared/bahmni_config/ 2>/dev/null || true
-              echo "Configuration files copied successfully!"
-              echo "Files in shared volume:"
+              echo "Checking if config exists..."
+              if [ -z "$(ls -A /shared/bahmni_config)" ]; then
+                echo "No config found, copying default config..."
+                mkdir -p /shared/bahmni_config/openmrs/apps/home
+                cp -r /etc/bahmni_config/* /shared/bahmni_config/
+                echo "Config copied successfully!"
+              else
+                echo "Config already exists. Skipping copy."
+              fi
               ls -la /shared/bahmni_config/
-              echo "Keeping container alive..."
               tail -f /dev/null
+
       volumes:
         - name: shared-config-volume
           persistentVolumeClaim:
             claimName: bahmni-config-pvc
+
       imagePullSecrets:
         - name: ecr-secret
