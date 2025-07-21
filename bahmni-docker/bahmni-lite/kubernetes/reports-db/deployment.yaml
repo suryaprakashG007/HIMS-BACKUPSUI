@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: reports-db
-          image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/reports-db:8.0  # ECR image
+          image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/reports-db:mysql8.0  # ECR image
           ports:
             - containerPort: 3306
           env:
