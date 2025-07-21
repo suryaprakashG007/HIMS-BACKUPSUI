@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: reports
+  name: bahmni-reports
 spec:
   selector:
     app: bahmni-reports
