@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: reports
+  name: bahmni-reports
 spec:
-  type: ClusterIP
   selector:
-    app: reports
+    app: bahmni-reports
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 80
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
