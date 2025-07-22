@@ -1,23 +1,23 @@
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: implementer-interface
-#   labels:
-#     app: implementer-interface
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: implementer-interface
-#   template:
-#     metadata:
-#       labels:
-#         app: implementer-interface
-#     spec:
-#       containers:
-#         - name: implementer-interface
-#           image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/implementer-interface:1.0.0
-#           ports:
-#             - containerPort: 80
-#       imagePullSecrets:
-#         - name: ecr-secret
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: implementer-interface
+  labels:
+    app: implementer-interface
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: implementer-interface
+  template:
+    metadata:
+      labels:
+        app: implementer-interface
+    spec:
+      containers:
+        - name: implementer-interface
+          image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/implementer-interface:1.0.0
+          ports:
+            - containerPort: 80
+      imagePullSecrets:
+        - name: ecr-secret
