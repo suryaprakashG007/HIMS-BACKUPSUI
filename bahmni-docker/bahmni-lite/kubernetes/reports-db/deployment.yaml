@@ -1,44 +1,44 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: reports-db
-  labels:
-    app: reports-db
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: reports-db
-  template:
-    metadata:
-      labels:
-        app: reports-db
-    spec:
-      containers:
-        - name: reports-db
-          image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/reports-db:8.0  # ECR image
-          ports:
-            - containerPort: 3306
-          env:
-            - name: MYSQL_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: reports-db-secret
-                  key: root-password
-            - name: MYSQL_DATABASE
-              valueFrom:
-                secretKeyRef:
-                  name: reports-db-secret
-                  key: db-name
-            - name: MYSQL_USER
-              valueFrom:
-                secretKeyRef:
-                  name: reports-db-secret
-                  key: db-user
-            - name: MYSQL_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: reports-db-secret
-                  key: db-password
-      imagePullSecrets:
-        - name: ecr-secret
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: reports-db
+#   labels:
+#     app: reports-db
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: reports-db
+#   template:
+#     metadata:
+#       labels:
+#         app: reports-db
+#     spec:
+#       containers:
+#         - name: reports-db
+#           image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/reports-db:8.0  # ECR image
+#           ports:
+#             - containerPort: 3306
+#           env:
+#             - name: MYSQL_ROOT_PASSWORD
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: reports-db-secret
+#                   key: root-password
+#             - name: MYSQL_DATABASE
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: reports-db-secret
+#                   key: db-name
+#             - name: MYSQL_USER
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: reports-db-secret
+#                   key: db-user
+#             - name: MYSQL_PASSWORD
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: reports-db-secret
+#                   key: db-password
+#       imagePullSecrets:
+#         - name: ecr-secret

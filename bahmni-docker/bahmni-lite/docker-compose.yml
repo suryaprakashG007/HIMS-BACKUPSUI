@@ -46,7 +46,7 @@ services:
 
   openmrs:
     profiles: ["emr","bahmni-lite", "bahmni-mart"]
-    image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/openmrs:1.0.1
+    image: bahmni/openmrs:${OPENMRS_IMAGE_TAG:?}
     environment:
       TZ: ${TZ}
       OMRS_DB_NAME: ${OPENMRS_DB_NAME:?}
@@ -96,7 +96,7 @@ services:
     restart: ${RESTART_POLICY}
 
   openmrsdb:
-    image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/openmrs-db:1.0.0-lite-mysql5.6
+    image: ${OPENMRS_DB_IMAGE_NAME:?}
     restart: always
     profiles: ["emr","bahmni-lite", "metabase", "bahmni-mart"]
     platform: linux/amd64 
@@ -116,7 +116,7 @@ services:
     logging: *log-config
 
   crater-php:
-    image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/crater-php:1.0.0
+    image: bahmni/crater-php:${CRATER_PHP_IMAGE_TAG:?}
     profiles: ["crater","bahmni-lite"]
     platform: linux/amd64 
     restart: unless-stopped
@@ -144,7 +144,7 @@ services:
       APP_DEBUG: ${CRATER_APP_DEBUG:?}
 
   crater-nginx:
-    image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/crater-nginx:1.0.0
+    image: bahmni/crater-nginx:${CRATER_NGINX_IMAGE_TAG:?}
     profiles: ["crater","bahmni-lite"]
     platform: linux/amd64 
     restart: unless-stopped
@@ -253,7 +253,7 @@ services:
      - 'bahmni-clinical-forms:/home/bahmni/clinical_forms'
 
   bahmni-web:
-    image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/bahmni-web:1.0.0
+    image: bahmni/bahmni-web:${BAHMNI_WEB_IMAGE_TAG:?}
     profiles: ["emr","bahmni-lite","bahmni-mart"]
     volumes:
       - "${CONFIG_VOLUME:?}:/usr/local/apache2/htdocs/bahmni_config/:ro"
@@ -273,7 +273,7 @@ services:
     restart: ${RESTART_POLICY}
 
   reports:
-    image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/reports:1.0.0
+    image: bahmni/reports:${REPORTS_IMAGE_TAG:?}
     profiles: ["reports","bahmni-lite","bahmni-mart"]
     environment:
       TZ: ${TZ}
@@ -301,7 +301,7 @@ services:
 
   reportsdb:
     platform: linux/amd64
-    image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/reports-db:8.0
+    image: ${REPORTS_DB_IMAGE_NAME:?}
     profiles: ["reports","bahmni-lite","bahmni-mart"]
     environment:
       TZ: ${TZ}
@@ -315,7 +315,7 @@ services:
     restart: ${RESTART_POLICY}
 
   patient-documents:
-    image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/patient-documents:1.0.0
+    image: 'bahmni/patient-documents:${PATIENT_DOCUMENTS_TAG:?}'
     profiles: ["emr","bahmni-lite"]
     volumes:
       - 'bahmni-document-images:/usr/share/nginx/html/document_images'
@@ -330,7 +330,7 @@ services:
     restart: ${RESTART_POLICY}
 
   appointments:
-    image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/appointments:1.0.0
+    image: bahmni/appointments:${APPOINTMENTS_IMAGE_TAG:?}
     profiles: ["emr","bahmni-lite"]
     restart: ${RESTART_POLICY}
     volumes:
@@ -363,7 +363,7 @@ services:
       OPENMRS_DB_PASSWORD: ${OPENMRS_DB_PASSWORD}
 
   crater-atomfeed:
-    image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/crater-atomfeed:1.0.0
+    image: bahmni/crater-atomfeed:${CRATER_ATOMFEED_IMAGE_TAG:?}
     profiles: ["crater","bahmni-lite"]
     platform: linux/amd64 
     restart: ${RESTART_POLICY}
