@@ -38,7 +38,7 @@
       "linkPrefix": "erp"
     },
     {
-      "enabled": false,
+      "enabled": true,
       "name": "crater",
       "title": "Payment & Billing",
       "logo": "/bahmni/images/Frontpayment.png",
