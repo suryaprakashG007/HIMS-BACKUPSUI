@@ -18,7 +18,7 @@ x-log-config: &log-config
 services:
 
   proxy:
-    image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/proxy:1.0.0
+    image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/proxy:1.0.0
     #volumes:
       # - ${CERTIFICATE_PATH}:/etc/tls
     ports:
@@ -30,7 +30,7 @@ services:
       TZ: ${TZ}
 
   bahmni-config:
-    image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/democonfig:latest
+    image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/clinic-config:1.0.0
     volumes:
       - '${CONFIG_VOLUME:?}:/usr/local/bahmni_config'
     logging: *log-config
@@ -253,7 +253,7 @@ services:
      - 'bahmni-clinical-forms:/home/bahmni/clinical_forms'
 
   bahmni-web:
-    image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/bahmni-web:1.0.0
+    image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/bahmni-web:1.0.0
     profiles: ["emr","bahmni-lite","bahmni-mart"]
     volumes:
       - "${CONFIG_VOLUME:?}:/usr/local/apache2/htdocs/bahmni_config/:ro"

@@ -64,7 +64,7 @@ spec:
     spec:
       containers:
         - name: clinic-config
-          image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/democonfig:latest
+          image: 779846789022.ecr.ap-south-1.amazonaws.com/clinic-config:1.0.0
           volumeMounts:
             - name: shared-config-volume
               mountPath: /shared/bahmni_config
@@ -76,7 +76,7 @@ spec:
               echo "📦 Copying new config from /etc/bahmni_config..."
               mkdir -p /shared/bahmni_config/openmrs/apps/home
               cp -r /etc/bahmni_config/* /shared/bahmni_config/
-              echo "✅ Config copied."
+              echo "Config copied."
               ls -la /shared/bahmni_config/
               tail -f /dev/null
       volumes:
