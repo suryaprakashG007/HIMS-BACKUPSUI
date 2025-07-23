@@ -18,7 +18,7 @@ x-log-config: &log-config
 services:
 
   proxy:
-    image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/proxy:1.0.0
+    image: 'bahmni/proxy:${PROXY_IMAGE_TAG:?}'
     #volumes:
       # - ${CERTIFICATE_PATH}:/etc/tls
     ports:
