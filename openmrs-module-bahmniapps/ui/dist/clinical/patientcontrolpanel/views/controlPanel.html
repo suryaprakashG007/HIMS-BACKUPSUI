@@ -1,0 +1,86 @@
+<style>
+    aside.visit-history li a {
+    display: block;
+    padding: 10px 20px;
+    color: white;
+    font-size: 14px;
+    border-bottom: 1px solid #262626;
+    border-top: 1px solid #404040;
+}
+</style>
+
+<div class="patient-control-panel">
+    <div class="overlay" ng-show="$parent.showControlPanel" ng-click="$parent.toggleControlPanel()"></div>
+    <aside bindonce="patient" class="visit-history ng-hide" ng-show="$parent.showControlPanel">
+
+        <div class="patient-info">
+            <div>
+                <a class="patient-img" href="{{::getDashboardLink()}}" ng-click="changeContext($event)">
+                    <img class="patient-image" ng-src="{{::patient.image}}" fallback-src="../images/blank-user.gif">
+                </a>
+                <div class="patient-handler">
+                    <h4 class="patient-name">
+                        <a href="{{::getDashboardLink()}}" ng-click="changeContext($event)">
+                            <span bo-text="patient.name"></span>
+                        </a>
+                        <span ng-show="patient.genderText" ng-bind-html="' ('+patient.genderText+')'"></span>
+                    </h4>
+                    <h5 class="patient-identifier"><span bo-text="patient.identifier"></span></h5>
+                </div>
+            </div>
+            <h5><span ng-bind-html="patient.ageText"></span></h5>
+            <h5><span ng-show="patient.address.cityVillage" bo-text="patient.address.cityVillage"></span>
+              <span ng-show="patient.address.countyDistrict"> / {{patient.address.countyDistrict}}</span></h5>
+            <span class="ward" bo-text="bedDetails.wardName + ' ' + bedDetails.bedNumber"></span>
+        </div>
+
+        <h2 style="color: white">{{'CONTROL_PANEL_ACTIONS'|translate}}</h2>
+        <ul>
+            <li class="btn-patient-doc" ng-click="$parent.toggleControlPanel()">
+                <div bm-gallery patient="patient" access-impression="true" style="display: flex; flex-direction: row; align-items: center">
+                <a href="" bm-lazy-image-observation-gallery-items promise="documentsPromise" style="display: flex; align-items: center">
+                <img src="/bahmni/images/Controlpaneldoc.png" alt="patientdoc" style="height: 24px; width: 24px; margin-right: 10px">
+                {{"PATIENT_DOCUMENT_TRANSLATION_KEY"|translate}}
+                </a>
+                </div>
+            </li><li class="{{link.icon}}" ng-click="changeContext($event)" ng-repeat="link in links">
+                <a href="{{link.href}}" ng-click="link.onClick($event)" style="display: flex; align-items: center"><img src="/bahmni/images/Controlpanelconsult.png" alt="consultation" style="height: 24px; width: 24px; margin-right: 10px">{{link.text}}</a>
+            </li>
+        </ul>
+
+        <h2 style="color: white">{{'CONTROL_PANEL_OTHER_ACTIONS'|translate}}</h2>
+        <ul class="bahmni-home">
+            <li><a class="header-logo" href="../home/index.html" style="display: flex; align-items: center"><img src="/bahmni/images/Controlpanelhome.png" alt="home" style="height: 24px; width: 24px; margin-right: 10px">Home</a></li>
+        </ul>
+        <ul>
+            <li>
+                <a class="log-out" log-out style="display: flex; align-items: center"><img src="/bahmni/images/Controlpanellogout.png" alt="logout" style="height: 24px; width: 24px; margin-right: 10px"> {{"LOGOUT_TRANSLATION_KEY"| translate}}
+                <span ng-show="$parent.currentUser.username">
+                    ({{$parent.currentUser.username}}-
+                </span>
+                <span ng-show="$parent.currentUser.currentLocation">
+                    {{$parent.currentUser.currentLocation | translate}})
+                </span></a>
+            </li>
+        </ul>
+        <ul show-if-privilege="{{retrospectivePrivilege}}">
+            <li ng-hide="isInEditEncounterMode()">
+                <label for="retro-date-widget" class="retro-date-widget">{{"ENTERING_DATA_FOR_TRANSLATION_KEY"| translate}}</label>
+                <br>
+                <label class="retro-date-widget disabled-date">{{(consultation.encounterDateTime || today)| bahmniDate}}</label>
+            </li>
+            <li ng-show="isInEditEncounterMode()">
+                <label for="retro-date-widget" class="retro-date-widget">{{"EDITITNG_DATA_FOR_ENCOUNTER_TRANSLATION_KEY" | translate}}</label>
+                <br>
+                <label class="retro-date-widget disabled-date">{{consultation.encounterDateTime| bahmniDateTime}}</label>
+            </li>
+        </ul>
+        <ul show-if-privilege="{{encounterProviderPrivilege}}" ng-if="isValidProvider() && !isInEditEncounterMode()">
+            <li>
+                <label class="retro-date-widget disabled-date">- {{"ON_BEHALF_OF_TRANSLATION_KEY"| translate}}</label>
+                <br>
+                <label class="retro-date-widget disabled-date">{{encounterProvider.value}}</label>
+            </li>
+        </ul>
+    </aside>
+</div>
