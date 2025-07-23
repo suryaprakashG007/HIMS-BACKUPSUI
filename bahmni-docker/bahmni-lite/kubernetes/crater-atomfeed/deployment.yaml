@@ -42,7 +42,7 @@ spec:
 
       containers:
         - name: crater-atomfeed
-          image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/crater-atomfeed:1.0.0
+          image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/crater-atomfeed:1.0.0
           command: ["java"]
           args: ["-jar", "/crater-atomfeed.jar"]
           ports:

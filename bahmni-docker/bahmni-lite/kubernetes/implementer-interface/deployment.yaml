@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: implementer-interface
-          image: 913524912266.dkr.ecr.ap-south-1.amazonaws.com/implementer-interface:1.0.0
+          image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/implementer-interface:1.0.0
           ports:
             - containerPort: 80
       imagePullSecrets:
