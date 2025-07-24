@@ -46,47 +46,6 @@
 #         - name: ecr-secret
 
 
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: clinic-config
-#   labels:
-#     app: clinic-config
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: clinic-config
-#   template:
-#     metadata:
-#       labels:
-#         app: clinic-config
-#     spec:
-#       containers:
-#         - name: clinic-config
-#           image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/clinic-config:1.0.0
-#           volumeMounts:
-#             - name: shared-config-volume
-#               mountPath: /shared/bahmni_config
-#           command: ["sh", "-c"]
-#           args:
-#             - |
-#               echo "🧹 Cleaning existing config..."
-#               rm -rf /shared/bahmni_config/*
-#               echo "📦 Copying new config from /etc/bahmni_config..."
-#               mkdir -p /shared/bahmni_config/openmrs/apps/home
-#               cp -r /etc/bahmni_config/* /shared/bahmni_config/
-#               echo "Config copied."
-#               ls -la /shared/bahmni_config/
-#               tail -f /dev/null
-#       volumes:
-#         - name: shared-config-volume
-#           persistentVolumeClaim:
-#             claimName: bahmni-config-pvc
-#       imagePullSecrets:
-#         - name: regcred
-
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -106,11 +65,25 @@ spec:
       containers:
         - name: clinic-config
           image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/clinic-config:1.0.0
+          volumeMounts:
+            - name: shared-config-volume
+              mountPath: /shared/bahmni_config
           command: ["sh", "-c"]
           args:
             - |
-              echo "📦 Using internal config only..."
-              ls -la /etc/bahmni_config/
+              echo "🧹 Cleaning existing config..."
+              rm -rf /shared/bahmni_config/*
+              echo "📦 Copying new config from /etc/bahmni_config..."
+              mkdir -p /shared/bahmni_config/openmrs/apps/home
+              cp -r /etc/bahmni_config/* /shared/bahmni_config/
+              echo "Config copied."
+              ls -la /shared/bahmni_config/
               tail -f /dev/null
+      volumes:
+        - name: shared-config-volume
+          persistentVolumeClaim:
+            claimName: bahmni-config-pvc
       imagePullSecrets:
         - name: regcred
+
+
