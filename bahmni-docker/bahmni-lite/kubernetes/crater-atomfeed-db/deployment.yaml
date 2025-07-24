@@ -35,4 +35,4 @@ spec:
                   name: crater-atomfeed-secret
                   key: user-password
       imagePullSecrets:
-        - name: ecr-secret
+        - name: regcred

@@ -20,4 +20,4 @@ spec:
           ports:
             - containerPort: 9000
       imagePullSecrets:
-        - name: ecr-secret
+        - name: regcred

@@ -46,4 +46,4 @@ spec:
               memory: "256Mi"
               cpu: "250m"
       imagePullSecrets:
-        - name: ecr-secret
+        - name: regcred

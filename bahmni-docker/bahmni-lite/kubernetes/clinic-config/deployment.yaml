@@ -84,4 +84,4 @@ spec:
           persistentVolumeClaim:
             claimName: bahmni-config-pvc
       imagePullSecrets:
-        - name: ecr-secret
+        - name: regcred

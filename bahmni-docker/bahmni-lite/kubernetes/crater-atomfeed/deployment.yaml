@@ -18,7 +18,7 @@ spec:
     spec:
       restartPolicy: Always
       imagePullSecrets:
-        - name: ecr-secret
+        - name: regcred
 
       initContainers:
         - name: wait-for-dependencies
