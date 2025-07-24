@@ -1,14 +1,9 @@
 {
-  "id": "home",
+  "id": "bahmni.homepage",
   "extensionPoints": [
     {
       "id": "org.bahmni.home.dashboard",
-      "description": "Home page widgets"
+      "description": "Bahmni Home Page"
     }
-  ],
-  "contextModel": {},
-  "label": "Home",
-  "url": "home",
-  "requiredPrivilege": "app:home",
-  "translationKey": "MODULE_LABEL_HOME_KEY"
+  ]
 }
