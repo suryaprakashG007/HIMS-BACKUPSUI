@@ -255,10 +255,10 @@ services:
   bahmni-web:
     image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/bahmni-web:1.0.0
     profiles: ["emr","bahmni-lite","bahmni-mart"]
-    volumes:
-      - "${CONFIG_VOLUME:?}:/usr/local/apache2/htdocs/bahmni_config/:ro"
-      - "${BAHMNI_APPS_PATH:?}/ui/app/:/usr/local/apache2/htdocs/bahmni"
-      - "${BAHMNI_APPS_PATH:?}/ui/node_modules/@bower_components/:/usr/local/apache2/htdocs/bahmni/components"
+    # volumes:
+    #   - "${CONFIG_VOLUME:?}:/usr/local/apache2/htdocs/bahmni_config/:ro"
+    #   - "${BAHMNI_APPS_PATH:?}/ui/app/:/usr/local/apache2/htdocs/bahmni"
+    #   - "${BAHMNI_APPS_PATH:?}/ui/node_modules/@bower_components/:/usr/local/apache2/htdocs/bahmni/components"
     logging: *log-config
     restart: ${RESTART_POLICY}
 
