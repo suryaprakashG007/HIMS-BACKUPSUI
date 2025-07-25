@@ -71,9 +71,9 @@ spec:
           command: ["sh", "-c"]
           args:
             - |
-              echo "🧹 Cleaning existing config..."
+              echo "Cleaning existing config..."
               rm -rf /shared/bahmni_config/*
-              echo "📦 Copying new config from /etc/bahmni_config..."
+              echo "Copying new config from /etc/bahmni_config..."
               mkdir -p /shared/bahmni_config/openmrs/apps/home
               cp -r /etc/bahmni_config/* /shared/bahmni_config/
               echo "Config copied."
