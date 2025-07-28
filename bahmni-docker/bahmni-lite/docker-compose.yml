@@ -330,7 +330,7 @@ services:
     restart: ${RESTART_POLICY}
 
   appointments:
-    image: bahmni/appointments:${APPOINTMENTS_IMAGE_TAG:?}
+    image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/appointments:1.0.0
     profiles: ["emr","bahmni-lite"]
     restart: ${RESTART_POLICY}
     volumes:
