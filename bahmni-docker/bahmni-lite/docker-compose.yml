@@ -46,7 +46,7 @@ services:
 
   openmrs:
     profiles: ["emr","bahmni-lite", "bahmni-mart"]
-    image: bahmni/openmrs:${OPENMRS_IMAGE_TAG:?}
+    image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/openmrs
     environment:
       TZ: ${TZ}
       OMRS_DB_NAME: ${OPENMRS_DB_NAME:?}
@@ -96,7 +96,7 @@ services:
     restart: ${RESTART_POLICY}
 
   openmrsdb:
-    image: ${OPENMRS_DB_IMAGE_NAME:?}
+    image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/openmrs-db
     restart: always
     profiles: ["emr","bahmni-lite", "metabase", "bahmni-mart"]
     platform: linux/amd64 
