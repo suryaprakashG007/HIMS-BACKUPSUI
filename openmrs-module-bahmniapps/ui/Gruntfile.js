@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = function (grunt) {
+    grunt.loadNpmTasks('grunt-text-replace');
+
     // load all grunt tasks
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
@@ -519,6 +521,22 @@ module.exports = function (grunt) {
                 ]
             }
         },
+        replace: {
+            fixHomePaths: {
+                src: ['<%= yeoman.dist %>/home/index.html'],
+                overwrite: true,
+                replacements: [
+                    {
+                        from: /href="(home\.min(?:\.web)?\.[^"]+\.css)"/g,
+                        to: 'href="../$1"'
+                    },
+                    {
+                        from: /src="(home\.min(?:\.web)?\.[^"]+\.js)"/g,
+                        to: 'src="../$1"'
+                    }
+                ]
+            }
+        },
         hologram: {
             generate: {
                 options: {
@@ -581,6 +599,7 @@ module.exports = function (grunt) {
         }
     });
 
+    grunt.registerTask('default', ['replace:fixHomePaths']);
     grunt.registerTask('test', ['karma:unit', 'coverage']);
 
     grunt.registerTask('bundle', [
@@ -602,7 +621,8 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'yarn-install',
-        'bundle'
+        'bundle',
+        'replace:fixHomePaths'
     ]);
 
     grunt.registerTask('uglify-and-rename', [
