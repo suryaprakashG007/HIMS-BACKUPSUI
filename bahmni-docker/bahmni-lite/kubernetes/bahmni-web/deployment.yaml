@@ -56,17 +56,17 @@ spec:
         app: bahmni-web
     spec:
       initContainers:
-        # Copy application files to shared volume if not already present
         - name: copy-app-files
           image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/bahmni-web:1.0.0
           command:
             - sh
             - -c
             - >
-              if [ ! -d /shared/usr/local/apache2/htdocs ]; then
+              if [ ! -f /shared/.initialized ]; then
                 echo "Copying application files...";
                 mkdir -p /shared/usr/local/apache2/htdocs &&
-                cp -r /usr/local/apache2/htdocs/* /shared/usr/local/apache2/htdocs/;
+                cp -r /usr/local/apache2/htdocs/* /shared/usr/local/apache2/htdocs/ &&
+                touch /shared/.initialized;
               else
                 echo "Application files already exist";
               fi
@@ -74,7 +74,6 @@ spec:
             - name: shared-config-volume
               mountPath: /shared
 
-        # Wait until config file is present
         - name: wait-for-config
           image: busybox
           command:
@@ -113,4 +112,5 @@ spec:
 
       imagePullSecrets:
         - name: regcred
+
 
