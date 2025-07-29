@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "grunt-replace": "^2.0.2"
+  }
+}
