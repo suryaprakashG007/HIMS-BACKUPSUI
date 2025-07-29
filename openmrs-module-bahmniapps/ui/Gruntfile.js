@@ -9,7 +9,7 @@ module.exports = function (grunt) {
         app: 'app',
         dist: 'dist',
         test: 'test',
-        root: '.',
+        root: '../',
         nodeModules: 'node_modules'
     };
 
