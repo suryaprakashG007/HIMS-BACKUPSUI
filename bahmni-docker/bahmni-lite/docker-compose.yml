@@ -30,7 +30,7 @@ services:
       TZ: ${TZ}
 
   bahmni-config:
-    image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/clinic-config:1.0.0
+    image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/clinic-config:1.0.2
     volumes:
       - '${CONFIG_VOLUME:?}:/usr/local/bahmni_config'
       - "${BAHMNI_APPS_PATH:?}/ui/app/:/usr/local/apache2/htdocs/bahmni"
