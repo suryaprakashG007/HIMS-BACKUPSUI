@@ -254,7 +254,7 @@ services:
      - 'bahmni-clinical-forms:/home/bahmni/clinical_forms'
 
   bahmni-web:
-    image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/bahmni-web:1.0.3
+    image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/bahmni-web:1.0.7
     profiles: ["emr","bahmni-lite","bahmni-mart"]
     volumes:
       - "${CONFIG_VOLUME:?}:/usr/local/apache2/htdocs/bahmni_config/:ro"
