@@ -1,3 +1,44 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: bahmni-web
+#   labels:
+#     app: bahmni-web
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: bahmni-web
+#   template:
+#     metadata:
+#       labels:
+#         app: bahmni-web
+#     spec:
+#       initContainers:
+#         - name: wait-for-config
+#           image: busybox
+#           command: ['sh', '-c', 'until [ -f /usr/local/apache2/htdocs/bahmni_config/openmrs/apps/home/app.json ]; do echo "Waiting for config..."; sleep 2; done']
+#           volumeMounts:
+#             - name: shared-config-volume
+#               mountPath: /usr/local/apache2/htdocs/bahmni_config
+
+#       containers:
+#         - name: bahmni-web
+#           image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/bahmni-web:1.0.0
+#           ports:
+#             - containerPort: 80
+#           volumeMounts:
+#             - name: shared-config-volume
+#               mountPath: /usr/local/apache2/htdocs/bahmni_config
+
+#       volumes:
+#         - name: shared-config-volume
+#           persistentVolumeClaim:
+#             claimName: bahmni-config-pvc
+
+#       imagePullSecrets:
+#         - name: regcred
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,12 +56,34 @@ spec:
         app: bahmni-web
     spec:
       initContainers:
-        - name: wait-for-config
-          image: busybox
-          command: ['sh', '-c', 'until [ -f /usr/local/apache2/htdocs/bahmni_config/openmrs/apps/home/app.json ]; do echo "Waiting for config..."; sleep 2; done']
+        # Copy application files to shared volume if not already present
+        - name: copy-app-files
+          image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/bahmni-web:1.0.0
+          command:
+            - sh
+            - -c
+            - >
+              if [ ! -d /shared/usr/local/apache2/htdocs ]; then
+                echo "Copying application files...";
+                mkdir -p /shared/usr/local/apache2/htdocs &&
+                cp -r /usr/local/apache2/htdocs/* /shared/usr/local/apache2/htdocs/;
+              else
+                echo "Application files already exist";
+              fi
           volumeMounts:
             - name: shared-config-volume
-              mountPath: /usr/local/apache2/htdocs/bahmni_config
+              mountPath: /shared
+
+        # Wait until config file is present
+        - name: wait-for-config
+          image: busybox
+          command:
+            - sh
+            - -c
+            - 'until [ -f /shared/usr/local/apache2/htdocs/bahmni_config/openmrs/apps/home/app.json ]; do echo "Waiting for config..."; sleep 2; done'
+          volumeMounts:
+            - name: shared-config-volume
+              mountPath: /shared
 
       containers:
         - name: bahmni-web
@@ -29,7 +92,19 @@ spec:
             - containerPort: 80
           volumeMounts:
             - name: shared-config-volume
-              mountPath: /usr/local/apache2/htdocs/bahmni_config
+              mountPath: /usr/local/apache2/htdocs
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
 
       volumes:
         - name: shared-config-volume
@@ -38,3 +113,4 @@ spec:
 
       imagePullSecrets:
         - name: regcred
+
