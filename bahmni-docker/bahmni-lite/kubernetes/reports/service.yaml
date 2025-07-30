@@ -9,5 +9,4 @@ spec:
     - protocol: TCP
       port: 8051
       targetPort: 8051
-      nodePort: 32080  # or any port between 30000–32767
-  type: NodePort
+  type: LoadBalancer
