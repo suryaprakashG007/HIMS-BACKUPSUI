@@ -21,7 +21,7 @@
       "title": "Clinical Service",
       "logo": "/bahmni/images/Frontclinical.png",
       "link": "/bahmni/home"
-    },
+    }, 
     
     {
       "enabled": false,
