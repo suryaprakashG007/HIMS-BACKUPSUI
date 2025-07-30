@@ -18,7 +18,8 @@
                     {{::visitSummary.admissionDetails.date | bahmniDate}}
                 </td>
                 <td ng-if="showDetailsButton(visitSummary.admissionDetails)">
-                    <button class="toggle fr" toggle="visitSummary.admissionDetails.show">
+                    <button class="toggle fr"
+                            toggle="visitSummary.admissionDetails.show">
                         <i class="fa fa-angle-down"></i>
                         <i class="fa fa-angle-up"></i>
                     </button>
@@ -40,13 +41,14 @@
                     {{::visitSummary.dischargeDetails.date| bahmniDate}}
                 </td>
                 <td ng-if="showDetailsButton(visitSummary.dischargeDetails)">
-                    <button class="toggle fr" toggle="visitSummary.dischargeDetails.show">
+                    <button class="toggle fr"
+                            toggle="visitSummary.dischargeDetails.show">
                         <i class="fa fa-angle-down"></i>
                         <i class="fa fa-angle-up"></i>
                     </button>
                 </td>
             </tr>
-            <tr ng-show="visitSummary.dischargeDetails.show || visitSummary.dischargeDetails.notes" ng-class="{'notes-open': visitSummary.admissionDetails.show}">
+            <tr ng-show="visitSummary.dischargeDetails.show || visitSummary.dischargeDetails.notes"  ng-class="{'notes-open': visitSummary.admissionDetails.show}">
                 <td colspan="3" class="notes inline-notes">
                     <pre class="left ng-binding">{{::visitSummary.dischargeDetails.notes}}</pre>
                     <div class="footer-note right">
@@ -54,7 +56,7 @@
                     </div>
                 </td>
             </tr>
-            <tr ng-show="visitSummary.showDaysAdmitted" class="view-past">
+            <tr ng-show="visitSummary.showDaysAdmitted"  class="view-past">
                 <td class="name">
                     <span class="disposition-state">{{::'DAYS_ADMITTED_MESSAGE' | translate}}</span>
                 </td>

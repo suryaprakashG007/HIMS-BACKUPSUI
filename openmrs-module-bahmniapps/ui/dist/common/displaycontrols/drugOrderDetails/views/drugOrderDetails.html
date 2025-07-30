@@ -40,7 +40,8 @@
                 <td>
                     <span>{{::drugOrder.additionalInstructions || ""}}</span>
                 </td>
-                <td class="toggle-btn" ng-if="::section.dashboardConfig.showDetailsButton">
+                <td class="toggle-btn"
+                    ng-if="::section.dashboardConfig.showDetailsButton">
                     <button class="toggle fr" toggle="drugOrder.showDetails">
                         <i class="fa fa-angle-down"></i>
                         <i class="fa fa-angle-up"></i>
@@ -51,7 +52,9 @@
                 <td colspan="8" class="notes inline-notes">
                     <div class="footer-note right">
                 <span class="provider">
-                    <provider-directive creator-name="{{::drugOrder.creatorName}}" provider-name="{{::drugOrder.provider.name}}" provider-date="::drugOrder.effectiveStartDate"></provider-directive>
+                    <provider-directive creator-name="{{::drugOrder.creatorName}}"
+                                        provider-name="{{::drugOrder.provider.name}}"
+                                        provider-date="::drugOrder.effectiveStartDate"></provider-directive>
                 </span>
                     </div>
                 </td>

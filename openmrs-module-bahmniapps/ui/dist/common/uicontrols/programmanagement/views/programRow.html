@@ -14,7 +14,8 @@
         <div class="ProgramEnrollInfo clearfix">
             <div class="form-field">
                 <div class="field-attribute">
-                    <label>{{::'PROGRAM_MANAGEMENT_START_DATE_KEY' | translate}} : <span class="asterick" ng-show="patientProgram.editing">*</span></label>
+                    <label>{{::'PROGRAM_MANAGEMENT_START_DATE_KEY' | translate}} : <span class="asterick"
+                                                                                         ng-show="patientProgram.editing">*</span></label>
                 </div>
                 <div class="field-value" ng-show="!patientProgram.editing">
                     <span>
@@ -23,11 +24,13 @@
                 </div>
                 <!--keep it as ng-if. Don't change it to ng-show.-->
                 <div class="field-value" ng-if="patientProgram.editing">
-                    <input type="date" max="{{getMaxAllowedDate(patientProgram.states)}}" ng-model="patientProgram.dateEnrolled" ng-required="true">
+                    <input type="date" max="{{getMaxAllowedDate(patientProgram.states)}}"
+                           ng-model="patientProgram.dateEnrolled" ng-required="true">
                 </div>
 
             </div>
-            <program-attributes patient-program="patientProgram" program-attribute-types="programAttributeTypes"></program-attributes>
+            <program-attributes patient-program="patientProgram"
+                                program-attribute-types="programAttributeTypes"></program-attributes>
         </div>
 
         <div class="program-action-container clearfix">
@@ -43,7 +46,8 @@
                     </div>
 
                     <div class="field-value" ng-show="patientProgram.editing">
-                        <select ng-model="patientProgram.selectedState" ng-options="state.concept.display for state in ::getStates(patientProgram.program) track by state.uuid">
+                        <select ng-model="patientProgram.selectedState"
+                                ng-options="state.concept.display for state in ::getStates(patientProgram.program) track by state.uuid">
                             <option value="">{{::'PROGRAM_MANAGEMENT_CHOOSE_STATE_KEY' | translate}}</option>
                         </select>
                     </div>
@@ -55,7 +59,8 @@
                     <label>{{::'PROGRAM_MANAGEMENT_LABEL_PROGRAM_OUTCOME' | translate}} : </label>
                 </div>
                 <div class="field-value">
-                    <select ng-model="patientProgram.outcomeData" ng-options="outcomeSelected.display for outcomeSelected in ::patientProgram.program.outcomesConcept.setMembers">
+                    <select ng-model="patientProgram.outcomeData"
+                            ng-options="outcomeSelected.display for outcomeSelected in ::patientProgram.program.outcomesConcept.setMembers">
                         <option value="">{{::'PROGRAM_MANAGEMENT_LABEL_CHOOSE_OUTCOME' | translate}}</option>
                     </select>
                 </div>
@@ -70,7 +75,8 @@
     <div class="state-list">
         <table>
             <tbody>
-            <tr ng-repeat="state in patientProgram.states| orderBy:'auditInfo.dateCreated':true" ng-if="state.voided != true">
+            <tr ng-repeat="state in patientProgram.states| orderBy:'auditInfo.dateCreated':true"
+                ng-if="state.voided != true">
                 <td>{{state.state.concept.display}}</td>
                 <td ng-if="state.endDate">{{state.startDate | bahmniDate}} {{::'PROGRAM_MANAGEMENT_TO_KEY' | translate}}
                     {{state.endDate | bahmniDate}}
@@ -81,7 +87,9 @@
                 <td>{{::'PROGRAM_MANAGEMENT_BY_KEY' | translate}} {{::state.auditInfo.creator.display}}
                     {{::'PROGRAM_MANAGEMENT_ON_KEY' | translate}} {{state.auditInfo.dateCreated | bahmniDate}}
                 </td>
-                <td><i ng-class="{'fa fa-remove': !state.endDate}" ng-confirm-click="removePatientState(patientProgram)" confirm-message="{{'PROGRAM_MANAGEMENT_DO_YOU_WANT_TO_REMOVE_KEY' | translate}}'{{state.state.concept.display}}'" ng-if="canRemovePatientState(state)" class="fa fa-remove"></i></td>
+                <td><i ng-class="{'fa fa-remove': !state.endDate}" ng-confirm-click="removePatientState(patientProgram)"
+                       confirm-message="{{'PROGRAM_MANAGEMENT_DO_YOU_WANT_TO_REMOVE_KEY' | translate}}'{{state.state.concept.display}}'"
+                       ng-if="canRemovePatientState(state)" class="fa fa-remove"></i></td>
             </tr>
             </tbody>
         </table>
@@ -92,4 +100,4 @@
         </span>
     </a>
 </div>
-<ng-include src="'../common/uicontrols/programmanagement/views/deleteProgram.html'"></ng-include>
+<ng-include src="'../common/uicontrols/programmanagement/views/deleteProgram.html'" ></ng-include>

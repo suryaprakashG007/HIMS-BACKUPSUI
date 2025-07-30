@@ -4,10 +4,10 @@
         <div ng-include src="'../common/ui-helper/messages.html'"></div>
         <section class="block hierarchy">
             <ul class="form-field">
-                <li ng-repeat="specimen in specimens">
+                <li ng-repeat="specimen in specimens" >
                 <span class="tree-list-item">
                     <span class="specimen-info">
-                        <span class="specimenSource toggle-container" toggle="specimen.isOpen">
+                        <span class="specimenSource toggle-container"   toggle="specimen.isOpen">
                             <i class="fa fa-caret-right"></i>
                             <i class="fa fa-caret-down"></i>
                             {{getDisplayName(specimen)}} :

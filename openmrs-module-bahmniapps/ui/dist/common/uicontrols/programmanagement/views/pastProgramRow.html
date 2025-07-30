@@ -50,7 +50,8 @@
     <div class="state-list" ng-show="patientProgram.isOpen && hasProgramWorkflowStates(patientProgram)">
         <table>
             <tbody>
-            <tr ng-repeat="state in patientProgram.states| orderBy:'auditInfo.dateCreated':true" ng-if="state.voided != true">
+            <tr ng-repeat="state in patientProgram.states| orderBy:'auditInfo.dateCreated':true"
+                ng-if="state.voided != true">
                 <td>{{state.state.concept.display}}</td>
                 <td ng-if="state.endDate">{{::state.startDate | bahmniDate}} {{::'PROGRAM_MANAGEMENT_TO_KEY' |
                     translate}} {{::state.endDate | bahmniDate}}
@@ -65,7 +66,9 @@
             </tbody>
         </table>
     </div>
-    <a ng-show="patientProgram.isOpen" class="back-btn dashboard-link" id="dashboard-link" ui-sref="patient.dashboard.show({
+    <a ng-show="patientProgram.isOpen"
+       class="back-btn dashboard-link" id="dashboard-link"
+       ui-sref="patient.dashboard.show({
                patientUuid: patient.uuid,
                programUuid: patientProgram.program.uuid,
                conceptSetGroupName: 'observations',
@@ -73,8 +76,8 @@
                dateCompleted: patientProgram.toDate,
                enrollment : patientProgram.uuid})">
         <span class="proggram-dashboard-text">
-            <span class="patient-name">{{::patientProgram.display}} Dashboard</span>
+            <span class="patient-name" >{{::patientProgram.display}} Dashboard</span>
         </span>
     </a>
 </div>
-<ng-include src="'../common/uicontrols/programmanagement/views/deleteProgram.html'"></ng-include>
+<ng-include src="'../common/uicontrols/programmanagement/views/deleteProgram.html'" ></ng-include>

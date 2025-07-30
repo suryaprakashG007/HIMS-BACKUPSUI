@@ -9,7 +9,7 @@
             {{'NO_DRUG_DETAILS_MESSAGE' | translate}}
         </p>
         <div class="drugOrderTableScroll noOfActions-{{::config.actions.length}}-width">
-            <table class="drug-order-table treatments-details-table" ng-class="{'drug-order-table-discontinue' : drugOrder.isMarkedForDiscontinue }">
+            <table class="drug-order-table treatments-details-table"  ng-class="{'drug-order-table-discontinue' : drugOrder.isMarkedForDiscontinue }">
                 <thead>
                 <tr>
                     <th class="empty-header header-alerts" ng-if="alertsPresent"></th>
@@ -60,15 +60,16 @@
                         <span ng-if="columnName === 'quantity'">{{::drugOrder.getQuantityWithUnit()}}</span>
                     
                     </td>
-                    <td class="buttonColumn" ng-class="{'noActionColumn' :!config.actions ,
+                    <td class="buttonColumn"  ng-class="{'noActionColumn' :!config.actions ,
                             'noActionColumnAddNote' : !config.actions && drugOrder.showAdditionalInstructions ,
                             'buttonColumnStopForm' : drugOrder.isMarkedForDiscontinue ,
                             'buttonColumnAddNote': drugOrder.showAdditionalInstructions ,
                             'noOfActions-{{::config.actions.length}}-width' :true,
                             'buttonColumnStopFormAddNote' : drugOrder.isMarkedForDiscontinue && drugOrder.showAdditionalInstructions }">
                         <div class="button-group-wrapper">
-                            <div class="button-group" ng-if="config.actions" ng-repeat="actionName in config.actions">
-                                <button ng-if="actionName=='void'" ng-confirm-click="remove(drugOrder)" confirm-message="{{ 'REMOVE_DRUG_ORDER_KEY' | translate: {drugName :drugOrder.drugNameDisplay} }}"><i class="fa fa-remove"></i></button>
+                            <div class="button-group" ng-if="config.actions"  ng-repeat="actionName in config.actions">
+                                <button ng-if="actionName=='void'" ng-confirm-click="remove(drugOrder)"
+                                        confirm-message="{{ 'REMOVE_DRUG_ORDER_KEY' | translate: {drugName :drugOrder.drugNameDisplay} }}" ><i class="fa fa-remove"></i></button>
                                 <button ng-if="actionName=='revise'" ng-disabled="!drugOrder.isActive() || !drugOrder.isEditAllowed" ng-click="revise(drugOrder, drugOrders)">
                                     <i class="fa fa-edit"></i>
                                 </button>
@@ -119,7 +120,9 @@
                                 <label class="control-label">{{ 'DRUG_DETAILS_STOP_DATE'|translate }}</label>
                             </div>
                             <div class="field-value">
-                                <input id="date-stopped" type="date" min="{{::getMinDateForDiscontinue(drugOrder)}}" max="{{::scheduledDate}}" ng-model="drugOrder.dateStopped" required="required">
+                                <input id="date-stopped" type="date" min="{{::getMinDateForDiscontinue(drugOrder)}}"
+                                       max="{{::scheduledDate}}" ng-model="drugOrder.dateStopped"
+                                       required="required">
                             </div>
                             <div class="field-value" ng-if="config.captureStopReason">
                                 <select id="stopped-reason" class="form-field instruction" ng-change="updateFormConditions(drugOrder)" ng-model="drugOrder.orderReasonConcept" ng-options="item as item.display for item in stoppedOrderReasons">
@@ -127,7 +130,8 @@
                                 </select>
                             </div>
                             <div class="field-value" ng-if="config.captureStopReason">
-                            <textarea ng-disabled="!drugOrder.orderReasonNotesEnabled" rows="1" id="stopped-reason-non-coded" class="form-field drug-order-notes" placeholder="{{ 'MEDICATION_RECENT_TAB_STOP_NOTES' | translate}}" ng-model="drugOrder.orderReasonText"></textarea>
+                            <textarea ng-disabled="!drugOrder.orderReasonNotesEnabled" rows="1" id="stopped-reason-non-coded" class="form-field drug-order-notes" placeholder="{{ 'MEDICATION_RECENT_TAB_STOP_NOTES' | translate}}"
+                                      ng-model="drugOrder.orderReasonText"></textarea>
                             </div>
                         </article>
                     </td>

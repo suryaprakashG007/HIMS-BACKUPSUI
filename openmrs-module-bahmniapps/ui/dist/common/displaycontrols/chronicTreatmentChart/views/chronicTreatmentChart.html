@@ -1,7 +1,13 @@
-<section class="dashboard-chronic-treatment-section dashboard-tabular-obs-section" id="regimen" ng-class="{'noTable' :(regimen.rows.length == 0),'hasTable' :(regimen.rows.length > 0 && section.rotateInPrint)}">
+<section class="dashboard-chronic-treatment-section dashboard-tabular-obs-section" id="regimen"
+     ng-class="{'noTable' :(regimen.rows.length == 0),'hasTable' :(regimen.rows.length > 0 && section.rotateInPrint)}">
     <section ng-class="{'rotate':section.rotateInPrint}">
         <h2 ng-if="!isClickable()" class="section-title">{{section | titleTranslate}}</h2>
-        <h2 ng-if="isClickable()" ng-dialog="../common/displaycontrols/chronicTreatmentChart/views/allChronicTreatmentChart.html" ng-dialog-controller="AllChronicTreatmentChartController" ng-dialog-data="{{dialogData}}" ng-dialog-class="ngdialog-theme-default ng-dialog-all-details-page" class="section-title has-link">
+        <h2 ng-if="isClickable()"
+            ng-dialog="../common/displaycontrols/chronicTreatmentChart/views/allChronicTreatmentChart.html"
+            ng-dialog-controller="AllChronicTreatmentChartController"
+            ng-dialog-data="{{dialogData}}"
+            ng-dialog-class="ngdialog-theme-default ng-dialog-all-details-page"
+            class="section-title has-link">
             <span class="title-link"> {{section | titleTranslate}} </span>
             <i class="fa fa-external-link"></i>
         </h2>
