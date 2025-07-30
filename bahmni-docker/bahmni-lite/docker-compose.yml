@@ -275,6 +275,8 @@ services:
 
   reports:
     image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/reports:1.0.0
+    ports:
+      - "8051:8051"
     profiles: ["reports","bahmni-lite","bahmni-mart"]
     environment:
       TZ: ${TZ}
