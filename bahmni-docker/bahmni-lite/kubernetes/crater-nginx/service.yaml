@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: crater-nginx
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: crater-nginx
   ports:
