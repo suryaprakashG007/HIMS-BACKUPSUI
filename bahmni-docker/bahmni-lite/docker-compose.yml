@@ -30,7 +30,7 @@ services:
       TZ: ${TZ}
 
   bahmni-config:
-    image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/clinic-config:3.0.0
+    image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/clinic-config:50.0.0
     volumes:
       - '${CONFIG_VOLUME:?}:/usr/local/bahmni_config'
       - "${BAHMNI_APPS_PATH:?}/ui/app/:/usr/local/apache2/htdocs/bahmni"
@@ -254,7 +254,7 @@ services:
      - 'bahmni-clinical-forms:/home/bahmni/clinical_forms'
 
   bahmni-web:
-    image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/bahmni-web:10.0.0
+    image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/bahmni-web:50.0.0
     profiles: ["emr","bahmni-lite","bahmni-mart"]
     volumes:
       - "${CONFIG_VOLUME:?}:/usr/local/apache2/htdocs/bahmni_config/:ro"
