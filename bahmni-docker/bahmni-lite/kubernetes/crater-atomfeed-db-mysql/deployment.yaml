@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: crater-atomfeed-db
+  name: crater-atomfeed-db-mysql
   labels:
-    app: crater-atomfeed-db
+    app: crater-atomfeed-db-mysql
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: crater-atomfeed-db
+      app: crater-atomfeed-db-mysql
   template:
     metadata:
       labels:
-        app: crater-atomfeed-db
+        app: crater-atomfeed-db-mysql
     spec:
       containers:
-        - name: crater-atomfeed-db
-          image: mysql:5.7
+        - name: crater-atomfeed-db-mysql
+          image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/mysql:5.7
           ports:
             - containerPort: 3306
           env:
