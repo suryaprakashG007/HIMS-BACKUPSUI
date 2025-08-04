@@ -9,5 +9,5 @@ spec:
     - protocol: TCP
       port: 9000           # Public/external port
       targetPort: 9000    # Container's internal port
-  type: LoadBalancer
+  type: ClusterIP
 
