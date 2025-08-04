@@ -23,7 +23,6 @@
 #       #   - name: regcred
 
 
-# Save this as crater-php-deployment.yaml and apply it
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -48,7 +47,7 @@ spec:
         - containerPort: 9000
         env:
         - name: CRATER_APP_URL
-          value: "https://google.com"
+          value: "https://payments-aa51414fb77674c63b202ced9aef1cfd-1457186657.ap-south-1.elb.amazonaws.com"
         - name: CRATER_DB_HOST
           value: "craterdb"
         - name: CRATER_DB_PORT
@@ -60,9 +59,9 @@ spec:
         - name: CRATER_DB_PASSWORD
           value: "crater"
         - name: CRATER_SANCTUM_STATEFUL_DOMAINS
-          value: "google.com"
+          value: "payments-aa51414fb77674c63b202ced9aef1cfd-1457186657.ap-south-1.elb.amazonaws.com"
         - name: CRATER_SESSION_DOMAIN
-          value: "google.com"
+          value: "payments-aa51414fb77674c63b202ced9aef1cfd-1457186657.ap-south-1.elb.amazonaws.com"
         - name: CRATER_AUTO_INSTALL
           value: "true"
         - name: CRATER_ADMIN_NAME
@@ -79,5 +78,3 @@ spec:
           value: "101"
         - name: CRATER_APP_DEBUG
           value: "false"
-      imagePullSecrets:
-      - name: regcred
