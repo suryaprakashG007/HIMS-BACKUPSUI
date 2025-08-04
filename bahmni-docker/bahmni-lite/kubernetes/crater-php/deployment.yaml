@@ -19,5 +19,5 @@ spec:
           image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/crater-php:1.0.0
           ports:
             - containerPort: 9000
-      imagePullSecrets:
-        - name: regcred
+      # imagePullSecrets:
+      #   - name: regcred
