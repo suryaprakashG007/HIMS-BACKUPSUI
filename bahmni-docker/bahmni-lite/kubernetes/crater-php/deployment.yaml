@@ -61,9 +61,9 @@ spec:
             - name: CRATER_DB_PASSWORD
               value: "crater"
             - name: CRATER_SANCTUM_STATEFUL_DOMAINS
-              value: "a5b32a39c3e904a94af8c0ef4f8963b3-1729414573.ap-south-1.elb.amazonaws.com:444"
+              value: "a51821b5b53de4d96a8cb1c0941795fe-1524957618.ap-south-1.elb.amazonaws.com:444"
             - name: CRATER_SESSION_DOMAIN
-              value: "a5b32a39c3e904a94af8c0ef4f8963b3-1729414573.ap-south-1.elb.amazonaws.com"
+              value: "a51821b5b53de4d96a8cb1c0941795fe-1524957618.ap-south-1.elb.amazonaws.com"
             - name: CRATER_AUTO_INSTALL
               value: "true"
             - name: CRATER_ADMIN_NAME
