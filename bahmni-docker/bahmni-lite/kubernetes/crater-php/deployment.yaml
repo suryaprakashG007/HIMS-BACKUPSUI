@@ -1,9 +1,35 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: crater-php
+#   labels:
+#     app: crater-php
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: crater-php
+#   template:
+#     metadata:
+#       labels:
+#         app: crater-php
+#     spec:
+#       containers:
+#         - name: crater-php
+#           image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/crater-php:1.0.0
+#           ports:
+#             - containerPort: 9000
+#       # imagePullSecrets:
+#       #   - name: regcred
+
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: crater-php
   labels:
     app: crater-php
+  name: crater-php
+  namespace: default
 spec:
   replicas: 1
   selector:
@@ -15,9 +41,40 @@ spec:
         app: crater-php
     spec:
       containers:
-        - name: crater-php
-          image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/crater-php:1.0.0
-          ports:
-            - containerPort: 9000
-      # imagePullSecrets:
-      #   - name: regcred
+      - image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/crater-php:1.0.0
+        name: crater-php
+        ports:
+        - containerPort: 9000
+        env:
+        - name: CRATER_APP_URL
+          value: "https://google.com"
+        - name: CRATER_DB_HOST
+          value: "craterdb"
+        - name: CRATER_DB_PORT
+          value: "3306"
+        - name: CRATER_DB_DATABASE
+          value: "crater"
+        - name: CRATER_DB_USERNAME
+          value: "crater"
+        - name: CRATER_DB_PASSWORD
+          value: "crater"
+        - name: CRATER_SANCTUM_STATEFUL_DOMAINS
+          value: "google.com"
+        - name: CRATER_SESSION_DOMAIN
+          value: "google.com"
+        - name: CRATER_AUTO_INSTALL
+          value: "true"
+        - name: CRATER_ADMIN_NAME
+          value: "Super Man"
+        - name: CRATER_ADMIN_EMAIL
+          value: "superman@bahmni.org"
+        - name: CRATER_ADMIN_PASSWORD
+          value: "Crater123"
+        - name: CRATER_COMPANY_NAME
+          value: "Bahmni"
+        - name: CRATER_COMPANY_SLUG
+          value: "Bahmni"
+        - name: CRATER_COUNTRY_ID
+          value: "101"
+        - name: CRATER_APP_DEBUG
+          value: "false"
