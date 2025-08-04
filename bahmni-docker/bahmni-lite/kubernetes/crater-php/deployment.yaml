@@ -50,7 +50,7 @@ spec:
             - name: CRATER_NGINX_IMAGE_TAG
               value: "1.0.0"
             - name: CRATER_APP_URL
-              value: "https://payments-a5b32a39c3e904a94af8c0ef4f8963b3-1729414573.ap-south-1.elb.amazonaws.com"
+              value: "https://karthik-a5b32a39c3e904a94af8c0ef4f8963b3-1729414573.ap-south-1.elb.amazonaws.com"
             - name: CRATER_DB_HOST
               value: "craterdb"
             - name: CRATER_DB_PORT
