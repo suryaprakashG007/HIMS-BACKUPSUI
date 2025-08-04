@@ -47,7 +47,7 @@ spec:
         - containerPort: 9000
         env:
         - name: CRATER_APP_URL
-          value: "https://google.com"
+          value: "https://a41cdf32c986f4f398005fd2e6c8477a-1267440881.ap-south-1.elb.amazonaws.com/payments"
         - name: CRATER_DB_HOST
           value: "craterdb"
         - name: CRATER_DB_PORT
