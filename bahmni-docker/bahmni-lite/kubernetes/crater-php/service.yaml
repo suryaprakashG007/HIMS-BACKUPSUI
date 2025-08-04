@@ -7,6 +7,7 @@ spec:
     app: crater-php
   ports:
     - protocol: TCP
-      port: 9000
-      targetPort: 9000
-  type: ClusterIP
+      port: 444           # Public/external port
+      targetPort: 9000    # Container's internal port
+  type: LoadBalancer
+
