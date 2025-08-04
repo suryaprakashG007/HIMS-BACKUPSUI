@@ -1,11 +1,27 @@
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: crater-nginx
+# spec:
+#   type: ClusterIP
+#   selector:
+#     app: crater-nginx
+#   ports:
+#     - name: http         
+#       port: 80
+#       targetPort: 80
+#     - name: https        
+#       port: 443
+#       targetPort: 443
+
 apiVersion: v1
 kind: Service
 metadata:
-  name: crater-nginx
+  name: proxy   # <-- this must match your LoadBalancer service
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
-    app: crater-nginx
+    app: crater-nginx  # must match crater-nginx pods
   ports:
     - name: http         
       port: 80
@@ -13,6 +29,7 @@ spec:
     - name: https        
       port: 443
       targetPort: 443
+
 
 # apiVersion: v1
 # kind: Service
