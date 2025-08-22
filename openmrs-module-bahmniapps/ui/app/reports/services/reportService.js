@@ -10,8 +10,7 @@ angular.module('bahmni.reports')
             "HTML": "text/html",
             "EXCEL": "application/vnd.ms-excel",
             "PDF": "application/pdf",
-            "CUSTOM EXCEL": "application/vnd.ms-excel-custom",
-            "ODS": "application/vnd.oasis.opendocument.spreadsheet"
+            "CUSTOM EXCEL": "application/vnd.ms-excel-custom"
         };
         var avaialbleDateRange = {
             "Today": currentDate,

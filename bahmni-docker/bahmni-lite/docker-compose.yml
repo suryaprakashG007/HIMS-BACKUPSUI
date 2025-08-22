@@ -1,5 +1,3 @@
-
-
 x-default-logging: &default
   {}
 
@@ -18,7 +16,7 @@ x-log-config: &log-config
 services:
 
   proxy:
-    image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/proxy:1.0.0
+    image: 'bahmni/proxy:${PROXY_IMAGE_TAG:?}'
     #volumes:
       # - ${CERTIFICATE_PATH}:/etc/tls
     ports:
@@ -30,12 +28,23 @@ services:
       TZ: ${TZ}
 
   bahmni-config:
-    image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/clinic-config:100.0.0
+    image: 'bahmni/clinic-config:${CONFIG_IMAGE_TAG:?}'
     volumes:
       - '${CONFIG_VOLUME:?}:/usr/local/bahmni_config'
-      - "${BAHMNI_APPS_PATH:?}/ui/app/:/usr/local/apache2/htdocs/bahmni"
+      - '../../clinic-config/openmrs/apps/admin/extension.json:/usr/local/bahmni_config/openmrs/apps/admin/extension.json'
+      - '../../clinic-config/openmrs/apps/clinical/dashboard.json:/usr/local/bahmni_config/openmrs/apps/clinical/dashboard.json'
+      - '../../clinic-config/openmrs/apps/home/extension.json:/usr/local/bahmni_config/openmrs/apps/home/extension.json'
+      - '../../clinic-config/openmrs/apps/home/whiteLabel.json:/usr/local/bahmni_config/openmrs/apps/home/whiteLabel.json'
+      - '../../clinic-config/openmrs/apps/registration/extension.json:/usr/local/bahmni_config/openmrs/apps/registration/extension.json'
+      - '../../openmrs-module-bahmniapps/ui/app/styles:/usr/local/bahmni_config/openmrs/styles'
+      - '../../openmrs-module-bahmniapps/ui/app/styles/appointments:/usr/local/bahmni_config/openmrs/styles/appointments'
+      - '../../clinic-config/openmrs/apps/registration/registrationCardLayout/print.html:/usr/local/bahmni_config/openmrs/apps/registration/registrationCardLayout/print.html'
+
     logging: *log-config
     restart: ${RESTART_POLICY}
+
+
+
 
   bahmni-lab:
     profiles: ["lab-lite","emr","bahmni-lite"]
@@ -254,7 +263,7 @@ services:
      - 'bahmni-clinical-forms:/home/bahmni/clinical_forms'
 
   bahmni-web:
-    image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/bahmni-web:100.0.0
+    image: bahmni/bahmni-web:${BAHMNI_WEB_IMAGE_TAG:?}
     profiles: ["emr","bahmni-lite","bahmni-mart"]
     volumes:
       - "${CONFIG_VOLUME:?}:/usr/local/apache2/htdocs/bahmni_config/:ro"
@@ -274,9 +283,7 @@ services:
     restart: ${RESTART_POLICY}
 
   reports:
-    image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/reports:1.0.0
-    ports:
-      - "8051:8051"
+    image: bahmni/reports:${REPORTS_IMAGE_TAG:?}
     profiles: ["reports","bahmni-lite","bahmni-mart"]
     environment:
       TZ: ${TZ}
@@ -304,7 +311,7 @@ services:
 
   reportsdb:
     platform: linux/amd64
-    image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/reports-db:8.0
+    image: ${REPORTS_DB_IMAGE_NAME:?}
     profiles: ["reports","bahmni-lite","bahmni-mart"]
     environment:
       TZ: ${TZ}
@@ -333,7 +340,7 @@ services:
     restart: ${RESTART_POLICY}
 
   appointments:
-    image: 779846789022.dkr.ecr.ap-south-1.amazonaws.com/appointments:1.0.0
+    image: bahmni/appointments:${APPOINTMENTS_IMAGE_TAG:?}
     profiles: ["emr","bahmni-lite"]
     restart: ${RESTART_POLICY}
     volumes:

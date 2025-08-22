@@ -9,16 +9,6 @@
     "order": 1,
     "requiredPrivilege": "app:registration"
   },
-  "programs": {
-    "id": "bahmni.programs",
-    "extensionPointId": "org.bahmni.home.dashboard",
-    "type": "link",
-    "translationKey": "MODULE_LABEL_PROGRAMS_KEY",
-    "url": "../clinical/#/programs/patient/search",
-    "iconImage": "/bahmni/images/Frontprogram.png",
-    "order": 2,
-    "requiredPrivilege": "app:clinical"
-  },
   "clinical": {
     "id": "bahmni.clinical",
     "extensionPointId": "org.bahmni.home.dashboard",
@@ -28,26 +18,6 @@
     "iconImage": "/bahmni/images/Clinical1.png",
     "order": 3,
     "requiredPrivilege": "app:clinical"
-  },
-  "implementerInterface": {
-    "id": "bahmni.implementer.interface",
-    "extensionPointId": "org.bahmni.home.dashboard",
-    "type": "link",
-    "translationKey": "MODULE_LABEL_IMPLEMENTER_INTERFACE_KEY",
-    "url": "/implementer-interface",
-    "icon": "fa fa-pencil-square-o",
-    "order": 4,
-    "requiredPrivilege": "app:implementer-interface"
-  },
-  "radiologyDocumentUpload": {
-    "id": "bahmni.radiology.document.upload",
-    "extensionPointId": "org.bahmni.home.dashboard",
-    "type": "link",
-    "translationKey": "MODULE_LABEL_RADIOLOGY_UPLOAD_KEY",
-    "url": "../document-upload/?encounterType=RADIOLOGY&topLevelConcept=All Radiology orders",
-    "iconImage": "/bahmni/images/Frontradio.png",
-    "order": 5,
-    "requiredPrivilege": "app:radiology-upload"
   },
   "patientDocumentUpload": {
     "id": "bahmni.patient.document.upload",

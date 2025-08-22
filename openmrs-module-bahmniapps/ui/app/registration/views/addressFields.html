@@ -49,7 +49,7 @@
  
   <div class="address-flex">
     <!-- Ordered fields: address1, address2, cityVillage, postalCode, countyDistrict, stateProvince -->
-    <article class="address-field" ng-repeat="field in ['address1', 'address2', 'cityVillage', 'postalCode', 'countyDistrict', 'stateProvince']">
+    <article class="address-field" ng-repeat="field in ['address1', 'address2', 'cityVillage']">
       <div ng-repeat="addressLevel in ::addressLevels" ng-if="addressLevel.addressField === field">
         <label class="address-label" for="{{::addressLevel.addressField}}">
           {{::getTranslatedAddressFields(addressLevel.name) | translate}}

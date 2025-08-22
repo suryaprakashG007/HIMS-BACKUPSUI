@@ -15,9 +15,11 @@
     background-color: #050A24;
     background-image:
         radial-gradient(500px circle at bottom left, rgba(45, 85, 251, 0.3), transparent 70%),
-        radial-gradient(500px circle at top right, rgba(45, 85, 251, 0.3), transparent 70%);
+        radial-gradient(500px circle at top right, rgba(45, 85, 251, 0.3), transparent 70%),
+        url('/bahmni/images/Grid.png');
     background-repeat: no-repeat;
-    background-size: cover;
+    background-position: bottom left, top right, center center;
+    background-size: cover,cover,80% auto;
     box-sizing: border-box;
     padding: 16px;
 }
@@ -147,7 +149,7 @@ button.confirm:hover {
 
 <div ng-hide="showOTP" class="login-container" style="display: flex;flex-direction: column;">
     <div>
-            <img src="/bahmni/images/MGlogo2.png" alt="login" style="height: 70px;width: 400px;margin-bottom: 50px;">
+            <img src="/bahmni/images/MGlogo2.png" alt="login" style="height: 90px;width: 500px;margin-bottom: 50px;">
         </div>
     <div class="login-card">
         <!-- Fixed Header Text -->
@@ -156,12 +158,12 @@ button.confirm:hover {
         </div>
 
         <!-- Locale Selector -->
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label style="color: #344054;" >{{'LOGIN_LABEL_SELECT_LOCALE_KEY' | translate}}</label>
             <select id="locale" ng-model="selectedLocale" ng-options="item.code as item.nativeName for item in locales" required
                     style="width:100%; height:41px; padding:10px; border:1px solid #ccc; border-radius:8px; font-size:14px;">
             </select>
-        </div>
+        </div> -->
 
         <!-- Login Form -->
         <form ng-submit="login()" name="loginForm" bm-form autofillable="true">
@@ -184,13 +186,25 @@ button.confirm:hover {
             </div>
 
             <!-- Password -->
-            <div class="form-group">
-                <label for="password" style="color: #344054;">
-                    {{'LOGIN_LABEL_PASSWORD_KEY' | translate}} <span style="color:red;">*</span>
-                </label>
-                <input type="password" id="password" name="password" ng-model="loginInfo.password"
-                       placeholder="{{'LOGIN_MESSAGE_ENTER_PASSWORD_KEY' | translate}}" ng-required="true">
-            </div>
+            <div class="form-group" style="position: relative;">
+    <label for="password" style="color: #344054;">
+        {{'LOGIN_LABEL_PASSWORD_KEY' | translate}} <span style="color:red;">*</span>
+    </label>
+    <input type="{{showPassword ? 'text' : 'password'}}" 
+           id="password" 
+           name="password" 
+           ng-model="loginInfo.password"
+           placeholder="{{'LOGIN_MESSAGE_ENTER_PASSWORD_KEY' | translate}}" 
+           ng-required="true"
+           style="padding-right: 35px;"> <!-- space for icon -->
+
+    <!-- Eye icon -->
+    <span ng-click="showPassword = !showPassword"
+          style="position: absolute; right: 10px; top: 32px; cursor: pointer; font-size: 16px;">
+        <i class="fa" ng-class="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+    </span>
+</div>
+
 
             <button type="submit" class="login-button">
                 {{'LOGIN_LABEL_LOGIN_KEY' | translate}}

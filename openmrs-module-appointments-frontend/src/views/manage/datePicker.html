@@ -1,8 +1,14 @@
 <p class="app-date-nav" ng-show="showDatePicker()">
-    <button class="app-today-btn" ng-click="goToCurrent()">{{::'CURRENT_DATE' |translate}}</button>
-    <button class="app-today-btn" ng-click="$parent.toggleWeekView()" ng-show="showButtons">{{::'WEEK' |translate}}</button>
-    <button class="app-today-btn" disabled ng-show="showButtons">{{::'DAY' |translate}}</button>
-    <button class="app-view-prev" ng-click="goToPrevious()"><i class="fa fa-angle-left"></i></button>
-    <input type="date" required ng-model="viewDate" ng-keydown="keydownEvent()" ng-blur="dateChanged()" ng-change="dateChanged()"/>
+<div>
+    <button class="app-today-btn" ng-click="goToCurrent()" style="margin-left: 2%;">{{::'CURRENT_DATE' |translate}}</button>
+    <button class="app-today-btn" ng-click="$parent.toggleWeekView()" ng-show="showButtons"
+        style="margin-left: 2%;">{{::'WEEK' |translate}}</button>
+    <button class="app-today-btn" disabled ng-show="showButtons" style="margin-left: 2%;">{{::'DAY'
+        |translate}}</button>
+    <button class="app-view-prev" ng-click="goToPrevious()" style="margin-left: 8%;"><i
+            class="fa fa-angle-left"></i></button>
+    <input type="date" required ng-model="viewDate" ng-keydown="keydownEvent()" ng-blur="dateChanged()"
+        ng-change="dateChanged()" />
     <button type="button" ng-click="goToNext()"><i class="fa fa-angle-right"></i></button>
+</div>
 </p>
